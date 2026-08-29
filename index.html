@@ -27,4 +27,17 @@
 </div><script>
 const s=['Abuja / FCT','Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno','Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','Gombe','Imo','Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa','Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'];document.getElementById('states').innerHTML=s.map((x,i)=>'<div class="state"><span>'+x+'</span><span class="'+(i?'soon':'active')+'">'+(i?'🔒 Coming Soon':'● Available')+'</span></div>').join('');
 function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(b){document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}scrollTo(0,0)}
-</script></body></html>
+</script><<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co/rest/v1/ '; 
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz';
+    const awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    </script>
+    
+
+
+
+
+    
+    
+      /body></html>
