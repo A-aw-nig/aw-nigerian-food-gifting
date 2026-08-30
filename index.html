@@ -32,6 +32,7 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
     const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co/rest/v1/ '; 
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz';
     const awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    console.log('AW Supabase client:', awSupabase ? 'CONNECTED' : 'NOT CONNECTED');
     </script>
     
 
