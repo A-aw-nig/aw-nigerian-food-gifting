@@ -29,7 +29,7 @@ const s=['Abuja / FCT','Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa'
 function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(b){document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}scrollTo(0,0)}
 </script><<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co/rest/v1/ '; 
+    const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co'; 
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz';
     const awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
     console.log('AW Supabase client:', awSupabase ? 'CONNECTED' : 'NOT CONNECTED');
