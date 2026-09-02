@@ -35,7 +35,26 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
     const awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
     
     
-    </script>
+  async function continueAsGuest() {
+  const captchaToken = window.turnstile ? turnstile.getResponse() : '';
+
+  if (!captchaToken) {
+    alert('Please complete the security check first.');
+    return;
+  }
+
+  const { data, error } = await awSupabase.auth.signInAnonymously({
+    options: { captchaToken }
+  });
+
+  if (error) {
+    alert('Guest sign-in failed: ' + error.message);
+    return;
+  }
+
+  alert('Welcome to AW!');
+}--  
+  </script>
     
 
 
@@ -43,4 +62,7 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
 
     
     
-      /body></html>
+ 
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAEfo-Iw8pIYNVCUD">
+</div><button id="guestButton" type="button" onclick="continueAsGuest()">Continue as Guest</button>    
+  /body></html>
