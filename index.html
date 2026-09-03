@@ -54,7 +54,16 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
   }
 
   alert('Welcome to AW!');
+    window.location.hash = 'marketplace';
+    await loadMarketplace();
 }  
+ async function loadMarketplace() {
+   if (error) {
+     console.error('Marketplace error:', error);
+     return;
+     }
+   console.log('Marketplace vendors:', vendors);
+   }
   </script>
     
 
