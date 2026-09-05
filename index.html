@@ -68,6 +68,7 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
      return;
      }
      console.log('Marketplace products:', products);
+     document.getElementById('marketplace').innerHTML += products.map(product => `<h3>${product.name}</h3>`).join('');
      return;
      }
    console.log('Marketplace vendors:', vendors);
