@@ -77,7 +77,7 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
      return;
      }
      console.log('Marketplace products:', products);
-     document.getElementById('marketplace').innerHTML += products.map(product => `<div class="product-card"><p class="vendor-name">${vendors.find(vendor => vendor.id === product.vendor_id)?.business_name || 'Vendor'}</p><h3>${product.name}</h3><p>₦${Number(product.price).toLocaleString('en-NG')}</p></div>`).join('');
+     document.getElementById('marketplace').innerHTML += products.map(product => `<div class="product-card"><p class="vendor-name">${vendors.find(vendor => vendor.id === product.vendor_id)?.business_name || 'Vendor'}</p><p class="vendor-location">📍 ${vendors.find(vendor => vendor.id === product.vendor_id)?.locations?.name || 'Location'}</p><h3>${product.name}</h3><p>₦${Number(product.price).toLocaleString('en-NG')}</p></div>`).join('');
      
   
    console.log('Marketplace vendors:', vendors);
