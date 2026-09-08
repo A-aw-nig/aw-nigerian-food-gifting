@@ -65,7 +65,7 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
     await loadMarketplace();
 }  
  async function loadMarketplace() {
-  const { data: vendors, error } = await awSupabase.from('vendors').select('*');
+  const { data: vendors, error } = await awSupabase.from('vendors').select('*, locations(name)');
    const { data: products, error: productsError } = await awSupabase.from('products').select('*');
    if (productsError) {
      console.error('Products error:', productsError);
