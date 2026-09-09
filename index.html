@@ -82,9 +82,10 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
   
    console.log('Marketplace vendors:', vendors);
    }
-  function addToCart(productId) {
-  alert('Product added to cart! Product ID: ' + productId);
-}
+  let cart = [];
+    function addToCart(productId) {
+cart.push(productId);
+alert('Added to cart! Cart now has ' + cart.length + ' item(s).');}
   </script>
     
 
