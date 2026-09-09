@@ -84,6 +84,9 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
    }
   let cart = [];
     function addToCart(productId) {
+      function openCart() {
+  alert('Your AW cart has ' + cart.length + ' item(s).');
+}
 cart.push(productId);
       document.getElementById('cartCounter').textContent = '🛒 Cart (' + cart.length + ')';
 alert('Added to cart! Cart now has ' + cart.length + ' item(s).');}
@@ -98,6 +101,6 @@ alert('Added to cart! Cart now has ' + cart.length + ' item(s).');}
  
   <div class="cf-turnstile" data-sitekey="0x4AAAAAAEfo-Iw8pIYNVCUD">
 </div><button id="guestButton" type="button" onclick="continueAsGuest()">Continue as Guest</button>
-  <div id="cartCounter">🛒 Cart (0)</div>
+  <div id="cartCounter"onclick="openCart()">🛒 Cart (0)</div>
   <div id="marketplace"></div>
   </body></html>
