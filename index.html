@@ -82,19 +82,18 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
   
    console.log('Marketplace vendors:', vendors);
    }
-  let cart = [];
-    function addToCart(productId) {
-      function openCart() {
+ let cart = [];
+
+function addToCart(productId) {
+  cart.push(productId);
+  document.getElementById('cartCounter').textContent = '🛒 Cart (' + cart.length + ')';
+  alert('Added to cart! Cart now has ' + cart.length + ' item(s).');
+}
+
+function openCart() {
   alert('Your AW cart has ' + cart.length + ' item(s).');
 }
-cart.push(productId);
-      document.getElementById('cartCounter').textContent = '🛒 Cart (' + cart.length + ')';
-alert('Added to cart! Cart now has ' + cart.length + ' item(s).');}
-  </script>
-    
-
-
-
+    </script>
 
     
     
