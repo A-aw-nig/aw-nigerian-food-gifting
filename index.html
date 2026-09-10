@@ -91,7 +91,9 @@ function addToCart(productId) {
 }
 
 function openCart() {
-  alert('Your AW cart has ' + cart.length + ' item(s).');
+ const panel = document.getElementById('cartPanel');
+panel.style.display = 'block';
+panel.innerHTML = '<h3>Your Cart 🛒</h3><p>' + cart.length + ' item(s) in your cart.</p>';
 }
     </script>
 
@@ -101,5 +103,6 @@ function openCart() {
   <div class="cf-turnstile" data-sitekey="0x4AAAAAAEfo-Iw8pIYNVCUD">
 </div><button id="guestButton" type="button" onclick="continueAsGuest()">Continue as Guest</button>
 <div id="cartCounter" onclick="openCart()">🛒 Cart (0)</div>
+  <div id="cartPanel" style="display:none;"></div>
   <div id="marketplace"></div>
   </body></html>
