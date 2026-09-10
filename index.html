@@ -98,6 +98,9 @@ function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
 panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br>Quantity: 1</p>').join('');}
+const total = cart.reduce((sum, item) => sum + item.price, 0);
+  panel.innerHTML += '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>';  
+    }
     </script>
 
     
