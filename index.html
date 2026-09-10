@@ -105,10 +105,24 @@ if (existingItem) {
 function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
-panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br>Quantity: ' + item.quantity + '</p>').join('');
+panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br><button type="button" onclick="changeQuantity(' + item.id + ', -1)">−</button> <strong>' + item.quantity + '</strong> <button type="button" onclick="changeQuantity(' + item.id + ', 1)">+</button></p>').join('');
 const total = cart.reduce((sum, item) => sum + item.price, 0);
   panel.innerHTML += '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>';  
     }
+    function changeQuantity(productId, change) {
+  const item = cart.find(item => item.id === productId);
+  if (!item) return;
+
+  item.quantity += change;
+
+  if (item.quantity <= 0) {
+    cart = cart.filter(item => item.id !== productId);
+  }
+
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById('cartCounter').textContent = '🛒 Cart (' + itemCount + ')';
+  openCart();
+}
     </script>
 
     
