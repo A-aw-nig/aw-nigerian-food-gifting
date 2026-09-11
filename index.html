@@ -114,8 +114,7 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
    function startCheckout() {
   const checkoutPanel = document.getElementById('checkoutPanel');
   checkoutPanel.style.display = 'block';
- checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3><input type="text" id="deliveryAddress" placeholder="Enter delivery address or area"><br><br><button type="button" onclick="continueCheckout()">Continue</button>';
-}
+checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number"><br><br><button type="button" onclick="continueRecipient()">Continue</button>';}
 
     function continueCheckout() {
   const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
@@ -124,6 +123,18 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     alert('Please enter a delivery address or area.');
     return;
   }
+
+     function continueRecipient() {
+  const recipientName = document.getElementById('recipientName').value.trim();
+  const recipientPhone = document.getElementById('recipientPhone').value.trim();
+
+  if (!recipientName || !recipientPhone) {
+    alert('Please enter the recipient name and phone number.');
+    return;
+  }
+
+  alert('Recipient details saved!');
+} 
 
   const checkoutPanel = document.getElementById('checkoutPanel');
 checkoutPanel.dataset.deliveryAddress = deliveryAddress;
