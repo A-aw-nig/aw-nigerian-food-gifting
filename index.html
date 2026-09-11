@@ -114,7 +114,7 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
    function startCheckout() {
   const checkoutPanel = document.getElementById('checkoutPanel');
   checkoutPanel.style.display = 'block';
-checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number"><br><br><button type="button" onclick="continueRecipient()">Continue</button>';
+checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number"><br><br><button type="button"onclick="alert('Recipient button clicked!')">Continue</button>';
 }
     function continueCheckout() {
   const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
