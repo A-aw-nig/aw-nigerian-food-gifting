@@ -114,7 +114,7 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
    function startCheckout() {
   const checkoutPanel = document.getElementById('checkoutPanel');
   checkoutPanel.style.display = 'block';
-  checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3>';
+ checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3><input type="text" id="deliveryAddress" placeholder="Enter delivery address or area">';
 }
     function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
