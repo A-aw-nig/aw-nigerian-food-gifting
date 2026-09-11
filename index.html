@@ -114,7 +114,18 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
    function startCheckout() {
   const checkoutPanel = document.getElementById('checkoutPanel');
   checkoutPanel.style.display = 'block';
- checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3><input type="text" id="deliveryAddress" placeholder="Enter delivery address or area">';
+ checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3><input type="text" id="deliveryAddress" placeholder="Enter delivery address or area"><br><br><button type="button" onclick="continueCheckout()">Continue</button>';
+}
+
+    function continueCheckout() {
+  const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+
+  if (!deliveryAddress) {
+    alert('Please enter a delivery address or area.');
+    return;
+  }
+
+  alert('Delivery location saved: ' + deliveryAddress);
 }
     function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
