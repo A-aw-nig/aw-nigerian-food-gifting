@@ -111,8 +111,10 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   panel.innerHTML += '<button type="button" onclick="startCheckout()">Proceed to Checkout</button>';
     }
 
-    function startCheckout() {
-  alert('📍 Where should we deliver?');
+   function startCheckout() {
+  const checkoutPanel = document.getElementById('checkoutPanel');
+  checkoutPanel.style.display = 'block';
+  checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3>';
 }
     function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
@@ -145,5 +147,6 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 </div><button id="guestButton" type="button" onclick="continueAsGuest()">Continue as Guest</button>
 <div id="cartCounter" onclick="openCart()">🛒 Cart (0)</div>
   <div id="cartPanel" style="display:none;"></div>
+  <div id="checkoutPanel" style="display:none;"></div>
   <div id="marketplace"></div>
   </body></html>
