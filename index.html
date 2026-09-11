@@ -145,10 +145,7 @@ function continueRecipient() {
 
 
 
-  const checkoutPanel = document.getElementById('checkoutPanel');
-checkoutPanel.dataset.deliveryAddress = deliveryAddress;
-checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number">';}
-    function changeQuantity(productId, change) {
+      function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
   if (!item) return;
 
