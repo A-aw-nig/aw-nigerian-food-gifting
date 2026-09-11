@@ -107,8 +107,13 @@ function openCart() {
 panel.style.display = 'block';
 panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br><button type="button" onclick="changeQuantity(' + item.id + ', -1)">−</button> <strong>' + item.quantity + '</strong> <button type="button" onclick="changeQuantity(' + item.id + ', 1)">+</button> <button type="button" onclick="removeItem(' + item.id + ')">Remove</button></p>').join('');
 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  panel.innerHTML += '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>';  
+  panel.innerHTML += '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>';
+  panel.innerHTML += '<button type="button" onclick="startCheckout()">Proceed to Checkout</button>';
     }
+
+    function startCheckout() {
+  alert('AW Checkout is starting! 💜');
+}
     function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
   if (!item) return;
