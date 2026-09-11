@@ -111,12 +111,13 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   panel.innerHTML += '<button type="button" onclick="startCheckout()">Proceed to Checkout</button>';
     }
 
-   function startCheckout() {
+function startCheckout() {
   const checkoutPanel = document.getElementById('checkoutPanel');
   checkoutPanel.style.display = 'block';
-checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number"><br><br><button type="button"onclick="alert('Recipient button clicked!')">Continue</button>';
+  checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3><input type="text" id="deliveryAddress" placeholder="Enter delivery address or area"><br><br><button type="button" onclick="continueCheckout()">Continue</button>';
 }
-    function continueCheckout() {
+
+function continueCheckout() {
   const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
 
   if (!deliveryAddress) {
@@ -124,8 +125,21 @@ checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type
     return;
   }
 
-     function continueRecipient() {
-  alert('Recipient button is working!');
+  const checkoutPanel = document.getElementById('checkoutPanel');
+  checkoutPanel.dataset.deliveryAddress = deliveryAddress;
+  checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number"><br><br><button type="button" onclick="continueRecipient()">Continue</button>';
+}
+
+function continueRecipient() {
+  const recipientName = document.getElementById('recipientName').value.trim();
+  const recipientPhone = document.getElementById('recipientPhone').value.trim();
+
+  if (!recipientName || !recipientPhone) {
+    alert('Please enter the recipient name and phone number.');
+    return;
+  }
+
+  alert('Recipient details saved!');
 }
 
 
