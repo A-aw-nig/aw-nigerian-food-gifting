@@ -158,6 +158,8 @@ function continueRecipient() {
   }
 
   const checkoutPanel = document.getElementById('checkoutPanel');
+  checkoutPanel.dataset.recipientName = recipientName;
+checkoutPanel.dataset.recipientPhone = recipientPhone;
   const deliveryAddress = checkoutPanel.dataset.deliveryAddress || '';
 
   const total = cart.reduce((sum, item) => {
