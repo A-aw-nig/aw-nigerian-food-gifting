@@ -183,7 +183,75 @@ checkoutPanel.dataset.recipientPhone = recipientPhone;
     '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>' +
     '<button type="button" onclick="continueToPayment()">Continue to Payment</button>';
 }
+async function continueToPayment() {
+  const checkoutPanel = document.getElementById('checkoutPanel');
 
+  const deliveryAddress = checkoutPanel.dataset.deliveryAddress || '';
+  const deliveryCity = checkoutPanel.dataset.deliveryCity || '';
+  const recipientName = checkoutPanel.dataset.recipientName || '';
+  const recipientPhone = checkoutPanel.dataset.recipientPhone || '';
+
+  const { data: { user }, error: userError } = await awSupabase.auth.getUser();
+
+  if (userError || !user) {
+    alert('Please sign in or continue as guest first.');
+    return;
+  }
+
+  if (cart.length === 0) {
+    alert('Your cart is empty.');
+    return;
+  }
+
+  const subtotal = cart.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
+  }, 0);
+
+  const deliveryFee = 0;
+  const totalAmount = subtotal + deliveryFee;
+
+  const { data: order, error: orderError } = await awSupabase
+    .from('orders')
+    .insert({
+      customer_id: user.id,
+      vendor_id: 1,
+      status: 'pending',
+      delivery_name: recipientName,
+      delivery_phone: recipientPhone,
+      delivery_address: deliveryAddress,
+      delivery_city: deliveryCity,
+      subtotal: subtotal,
+      delivery_fee: deliveryFee,
+      total_amount: totalAmount
+    })
+    .select('id')
+    .single();
+
+  if (orderError) {
+    console.error('Order error:', orderError);
+    alert('We could not create your order yet.');
+    return;
+  }
+
+  const orderItems = cart.map(item => ({
+    order_id: order.id,
+    product_id: item.id,
+    quantity: item.quantity,
+    unit_price: item.price
+  }));
+
+  const { error: itemsError } = await awSupabase
+    .from('order_items')
+    .insert(orderItems);
+
+  if (itemsError) {
+    console.error('Order items error:', itemsError);
+    alert('Order created, but the items could not be saved.');
+    return;
+  }
+
+  alert('AW order created successfully! Order #' + order.id);
+}
 
       function changeQuantity(productId, change) {
   const item = cart.find(item => item.id === productId);
