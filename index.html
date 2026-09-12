@@ -77,14 +77,18 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
      return;
      }
      console.log('Marketplace products:', products);
-     document.getElementById('marketplace').innerHTML += products.map(product => `<div class="product-card"><p class="vendor-name">${vendors.find(vendor => vendor.id === product.vendor_id)?.business_name || 'Vendor'}</p><p class="vendor-location">📍 ${vendors.find(vendor => vendor.id === product.vendor_id)?.locations?.name || 'Location'}</p><h3>${product.name}</h3><p>₦${Number(product.price).toLocaleString('en-NG')}</p><button class="add-to-cart" type="button"onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button></div>`).join('');
+     document.getElementById('marketplace').innerHTML += products.map(product => `<div class="product-card"><p class="vendor-name">${vendors.find(vendor => vendor.id === product.vendor_id)?.business_name || 'Vendor'}</p><p class="vendor-location">📍 ${vendors.find(vendor => vendor.id === product.vendor_id)?.locations?.name || 'Location'}</p><h3>${product.name}</h3><p>₦${Number(product.price).toLocaleString('en-NG')}</p><button class="add-to-cart" type="button"onclick="addToCart(${product.id}, '${product.name}', ${product.price}, ${product.vendor_id})">Add to Cart</button></div>`).join('');
      
   
    console.log('Marketplace vendors:', vendors);
    }
  let cart = [];
 
-function addToCart(productId, productName, productPrice) {
+function addToCart(productId, productName, productPrice, vendorId){ 
+  if (cart.length > 0 && cart[0].vendorId !== Number(vendorId)) {
+  alert('Please complete or clear your current vendor order before adding items from another vendor.');
+  return;
+}
  const existingItem = cart.find(item => item.id === productId);
 
 if (existingItem) {
@@ -92,9 +96,10 @@ if (existingItem) {
 } else {
   cart.push({
     id: productId,
-    name: productName,
-    price: Number(productPrice),
-    quantity: 1
+name: productName,
+price: Number(productPrice),
+vendorId: Number(vendorId),
+quantity: 1
   });
 }
   const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -214,7 +219,7 @@ async function continueToPayment() {
     .from('orders')
     .insert({
       customer_id: user.id,
-      vendor_id: 1,
+     vendor_id: cart[0].vendorId,
       status: 'pending',
       delivery_name: recipientName,
       delivery_phone: recipientPhone,
