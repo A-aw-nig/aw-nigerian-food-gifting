@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head>
+-<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#176B4D"><title>AW — Food, Gifts & Send Love Home</title>
 <style><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -113,23 +113,41 @@ const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
 function startCheckout() {
   const checkoutPanel = document.getElementById('checkoutPanel');
+
   checkoutPanel.style.display = 'block';
-  checkoutPanel.innerHTML = '<h3>📍 Where should we deliver?</h3><input type="text" id="deliveryAddress" placeholder="Enter delivery address or area"><br><br><button type="button" onclick="continueCheckout()">Continue</button>';
+  checkoutPanel.innerHTML =
+    '<h3>📍 Where should we deliver?</h3>' +
+    '<input type="text" id="deliveryAddress" placeholder="Enter delivery address or area">' +
+    '<br><br>' +
+    '<input type="text" id="deliveryCity" placeholder="City">' +
+    '<br><br>' +
+    '<button type="button" onclick="continueCheckout()">Continue</button>';
 }
 
 function continueCheckout() {
   const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+  const deliveryCity = document.getElementById('deliveryCity').value.trim();
 
-  if (!deliveryAddress) {
-    alert('Please enter a delivery address or area.');
+  if (!deliveryAddress || !deliveryCity) {
+    alert('Please enter the delivery address and city.');
     return;
   }
 
   const checkoutPanel = document.getElementById('checkoutPanel');
-  checkoutPanel.dataset.deliveryAddress = deliveryAddress;
-  checkoutPanel.innerHTML = '<h3>👤 Who is receiving this order?</h3><input type="text" id="recipientName" placeholder="Recipient name"><br><br><input type="tel" id="recipientPhone" placeholder="Recipient phone number"><br><br><button type="button" onclick="continueRecipient()">Continue</button>';
-}
 
+  checkoutPanel.dataset.deliveryAddress = deliveryAddress;
+  checkoutPanel.dataset.deliveryCity = deliveryCity;
+
+  checkoutPanel.innerHTML =
+    '<h3>👤 Who is receiving this order?</h3>' +
+    '<p><strong>📍 Delivering to:</strong><br>' +
+    deliveryAddress + ', ' + deliveryCity + '</p>' +
+    '<input type="text" id="recipientName" placeholder="Recipient name">' +
+    '<br><br>' +
+    '<input type="tel" id="recipientPhone" placeholder="Recipient phone number">' +
+    '<br><br>' +
+    '<button type="button" onclick="continueRecipient()">Continue</button>';
+}
 function continueRecipient() {
   const recipientName = document.getElementById('recipientName').value.trim();
   const recipientPhone = document.getElementById('recipientPhone').value.trim();
