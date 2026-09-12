@@ -222,13 +222,19 @@ async function continueToPayment() {
     product_id: item.id,
     quantity: item.quantity
   }));
+let checkoutToken = checkoutPanel.dataset.checkoutToken;
 
-  const { data, error } = await awSupabase.rpc('create_order_secure', {
+if (!checkoutToken) {
+  checkoutToken = crypto.randomUUID();
+  checkoutPanel.dataset.checkoutToken = checkoutToken;
+}
+  const { data, error } = await awSupabase.rpc('create_order_secure_once', {
     p_items: secureItems,
     p_delivery_name: recipientName,
     p_delivery_phone: recipientPhone,
     p_delivery_address: deliveryAddress,
-    p_delivery_city: deliveryCity
+    p_delivery_city: deliveryCity,
+p_checkout_token: checkoutToken
   });
 
   if (error) {
