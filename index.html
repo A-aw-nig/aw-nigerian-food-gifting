@@ -208,54 +208,33 @@ async function continueToPayment() {
     return;
   }
 
-  const subtotal = cart.reduce((sum, item) => {
-    return sum + (item.price * item.quantity);
-  }, 0);
+  const secureItems = cart.map(item => ({
+    product_id: item.id,
+    quantity: item.quantity
+  }));
 
-  const deliveryFee = 0;
-  const totalAmount = subtotal + deliveryFee;
+  const { data, error } = await awSupabase.rpc('create_order_secure', {
+    p_items: secureItems,
+    p_delivery_name: recipientName,
+    p_delivery_phone: recipientPhone,
+    p_delivery_address: deliveryAddress,
+    p_delivery_city: deliveryCity
+  });
 
-  const { data: order, error: orderError } = await awSupabase
-    .from('orders')
-    .insert({
-      customer_id: user.id,
-     vendor_id: cart[0].vendorId,
-      status: 'pending',
-      delivery_name: recipientName,
-      delivery_phone: recipientPhone,
-      delivery_address: deliveryAddress,
-      delivery_city: deliveryCity,
-      subtotal: subtotal,
-      delivery_fee: deliveryFee,
-      total_amount: totalAmount
-    })
-    .select('id')
-    .single();
-
-  if (orderError) {
-    console.error('Order error:', orderError);
+  if (error) {
+    console.error('Secure order error:', error);
     alert('We could not create your order yet.');
     return;
   }
 
-  const orderItems = cart.map(item => ({
-    order_id: order.id,
-    product_id: item.id,
-    quantity: item.quantity,
-    unit_price: item.price
-  }));
+  const order = data && data[0];
 
-  const { error: itemsError } = await awSupabase
-    .from('order_items')
-    .insert(orderItems);
-
-  if (itemsError) {
-    console.error('Order items error:', itemsError);
-    alert('Order created, but the items could not be saved.');
+  if (!order) {
+    alert('We could not confirm your order.');
     return;
   }
 
-  alert('AW order created successfully! Order #' + order.id);
+  alert('AW order created successfully! Order #' + order.order_id);
 }
 
       function changeQuantity(productId, change) {
