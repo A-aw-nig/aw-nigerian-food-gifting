@@ -116,7 +116,25 @@ async function loadMarketplace() {
 
   console.log('Marketplace vendors:', vendors);
   console.log('Marketplace products:', locationProducts);
- 
+ let cart = [];
+
+function addToCart(id, name, price, vendorId) {
+  const existingItem = cart.find(item => item.id === id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id: id,
+      name: name,
+      price: Number(price),
+      vendorId: vendorId,
+      quantity: 1
+    });
+  }
+
+  openCart();
+}
 }    function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
