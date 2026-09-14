@@ -39,7 +39,14 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
     const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co'; 
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz';
     const awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-    
+   let selectedStateId = null;
+let selectedLocationName = '';
+
+function setLocation(stateId, locationName) {
+  selectedStateId = stateId;
+  selectedLocationName = locationName;
+  loadMarketplace();
+}  
     
   async function continueAsGuest() {
   const captchaToken = window.turnstile ? turnstile.getResponse() : '';
@@ -109,14 +116,7 @@ async function loadMarketplace() {
 
   console.log('Marketplace vendors:', vendors);
   console.log('Marketplace products:', locationProducts);
-  let selectedStateId = null;
-let selectedLocationName = '';
-
-function setLocation(stateId, locationName) {
-  selectedStateId = stateId;
-  selectedLocationName = locationName;
-  loadMarketplace();
-}
+ 
 }    function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
