@@ -114,9 +114,11 @@ async function loadMarketplace() {
     </div>`;
   }).join('');
 
-  console.log('Marketplace vendors:', vendors);
-  console.log('Marketplace products:', locationProducts);
- let cart = [];
+ console.log('Marketplace vendors:', vendors);
+console.log('Marketplace products:', locationProducts);
+}
+
+let cart = [];
 
 function addToCart(id, name, price, vendorId) {
   const existingItem = cart.find(item => item.id === id);
@@ -135,6 +137,7 @@ function addToCart(id, name, price, vendorId) {
 
   openCart();
 }
+
 }    function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
