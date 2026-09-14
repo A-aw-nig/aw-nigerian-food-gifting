@@ -89,7 +89,7 @@ alert('Products found: ' + (products ? products.length : 0));
   }
 
   const vendorIds = vendors.map(vendor => vendor.id);
-
+alert('Vendor IDs: ' + vendorIds.join(', '));
   const locationProducts = products.filter(product =>
     vendorIds.includes(product.vendor_id)
   );
