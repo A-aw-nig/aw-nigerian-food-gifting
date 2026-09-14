@@ -77,7 +77,7 @@ async function loadMarketplace() {
   const { data: products, error: productsError } = await awSupabase
     .from('products')
     .select('*');
-
+alert('Products found: ' + (products ? products.length : 0));
   if (productsError) {
     console.error('Products error:', productsError);
     return;
