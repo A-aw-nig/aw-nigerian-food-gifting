@@ -72,31 +72,31 @@ async function loadMarketplace() {
   }
 
   const { data: vendors, error } = await vendorsQuery;
-  alert('Vendors found: ' + (vendors ? vendors.length : 0));
-
-  const { data: products, error: productsError } = await awSupabase
-    .from('products')
-    .select('*');
-alert('Products found: ' + (products ? products.length : 0));
-  if (productsError) {
-    console.error('Products error:', productsError);
-    return;
-  }
 
   if (error) {
     console.error('Marketplace error:', error);
     return;
   }
 
-  const vendorIds = vendors.map(vendor => vendor.id);
-alert('Vendor IDs: ' + vendorIds.join(', '));
-  const locationProducts = products.filter(product =>
-  vendorIds.map(Number).includes(Number(product.vendor_id))
-);
+  const { data: products, error: productsError } = await awSupabase
+    .from('products')
+    .select('*');
+
+  if (productsError) {
+    console.error('Products error:', productsError);
+    return;
+  }
+
+  const vendorIds = (vendors || []).map(vendor => Number(vendor.id));
+
+  const locationProducts = (products || []).filter(product =>
+    vendorIds.includes(Number(product.vendor_id))
   );
-alert('Location products found: ' + locationProducts.length);
+
   document.getElementById('marketplace').innerHTML = locationProducts.map(product => {
-    const vendor = vendors.find(vendor => vendor.id === product.vendor_id);
+    const vendor = vendors.find(
+      vendor => Number(vendor.id) === Number(product.vendor_id)
+    );
 
     return `<div class="product-card">
       <p class="vendor-name">${vendor?.business_name || 'Vendor'}</p>
@@ -109,17 +109,7 @@ alert('Location products found: ' + locationProducts.length);
 
   console.log('Marketplace vendors:', vendors);
   console.log('Marketplace products:', locationProducts);
-}
-let selectedStateId = null;
-let selectedLocationName = '';
-
-function setLocation(stateId, locationName) {
-  selectedStateId = stateId;
-  selectedLocationName = locationName;
-  alert('Shopping in ' + locationName);
-  loadMarketplace();
-}
-    function openCart() {
+}    function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
 panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br><button type="button" onclick="changeQuantity(' + item.id + ', -1)">−</button> <strong>' + item.quantity + '</strong> <button type="button" onclick="changeQuantity(' + item.id + ', 1)">+</button> <button type="button" onclick="removeItem(' + item.id + ')">Remove</button></p>').join('');
