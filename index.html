@@ -93,7 +93,7 @@ alert('Vendor IDs: ' + vendorIds.join(', '));
   const locationProducts = products.filter(product =>
     vendorIds.includes(product.vendor_id)
   );
-
+alert('Location products found: ' + locationProducts.length);
   document.getElementById('marketplace').innerHTML = locationProducts.map(product => {
     const vendor = vendors.find(vendor => vendor.id === product.vendor_id);
 
