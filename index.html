@@ -26,8 +26,7 @@
 <div class="card big" onclick="show('love')"><div class="emoji">❤️</div><h3>Send Love Home</h3><div class="muted">Send food, gifts and a personal message to someone you love in Abuja.</div></div>
 <div class="card"><div class="emoji">🍲</div><h3>Order Food</h3><div class="muted">Discover Abuja vendors.</div></div>
 <div class="card"><div class="emoji">🎁</div><h3>Shop Gifts</h3><div class="muted">Make someone smile.</div></div></div></section>
-<section class="section"><h2>Featured in Abuja</h2><div class="card vendor"><div class="avatar">🍛</div><div><h3>AW Pilot Vendor</h3><div class="muted">Food & Gifts • Abuja</div></div><div class="arrow">›</div></div><br><div class="card vendor"><div class="avatar">🥘</div><div><h3>Fresh Abuja Kitchen</h3><div class="muted">Nigerian meals • Abuja</div></div><div class="arrow">›</div></div></section>
-<section class="section"><div class="card"><div class="emoji">🏪</div><h3>Become an AW Vendor</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Join AW</button></div></section>
+<section class="section"><h2>Shop by Location</h2><div class="card vendor"><div class="avatar">🍛</div><div><h3>AW Pilot Vendor</h3><div class="muted">Food & Gifts • Abuja</div></div><div class="arrow">›</div></div><br><div class="card vendor"><div class="avatar">🥘</div><div><h3>Fresh Abuja Kitchen</h3><div class="muted">Nigerian meals • Abuja</div></div><div class="arrow">›</div></div></section><section class="section"><div class="card"><div class="emoji">🏪</div><h3>Become an AW Vendor</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Join AW</button></div></section>
 </main>
 <section id="love" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>❤️ Send Love Home</h1><p class="muted">Start with Abuja. Your loved one can receive food or a gift while you are away.</p><div class="notice"><b>🇬🇧 London → 🇳🇬 Abuja</b><br><small>London customers can use AW to send love home.</small></div><input class="field" placeholder="Recipient's name"><select class="field"><option>Relationship</option><option>Mum</option><option>Dad</option><option>Partner</option><option>Child</option><option>Sibling</option><option>Friend</option></select><input class="field" placeholder="Recipient phone number"><textarea class="field" rows="3" placeholder="Your personal message ❤️"></textarea><button class="cta" onclick="alert('Send Love Home is ready for the next backend stage.')">Continue</button></section>
 <section id="vendor" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>🏪 Become an AW Vendor</h1><p class="muted">Free to join. Pay commission only after a completed sale.</p><input class="field" placeholder="Business name"><input class="field" placeholder="Your name"><input class="field" placeholder="Phone / WhatsApp"><input class="field" placeholder="Email"><input class="field" placeholder="What do you sell?"><select class="field"><option>Abuja / FCT — Available Now</option></select><textarea class="field" rows="3" placeholder="Tell AW about your business"></textarea><button class="cta" onclick="alert('Membership request ready for the AW admin backend.')">Send Membership Request</button></section>
@@ -64,50 +63,61 @@ function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classL
     window.location.hash = 'marketplace';
     await loadMarketplace();
 }  
- async function loadMarketplace() {
-  const { data: vendors, error } = await awSupabase.from('vendors').select('*, locations(name)');
-   const { data: products, error: productsError } = await awSupabase.from('products').select('*');
-   if (productsError) {
-     console.error('Products error:', productsError);
-     return;
-   }
-   
-   if (error) {
-     console.error('Marketplace error:', error);
-     return;
-     }
-     console.log('Marketplace products:', products);
-     document.getElementById('marketplace').innerHTML += products.map(product => `<div class="product-card"><p class="vendor-name">${vendors.find(vendor => vendor.id === product.vendor_id)?.business_name || 'Vendor'}</p><p class="vendor-location">📍 ${vendors.find(vendor => vendor.id === product.vendor_id)?.locations?.name || 'Location'}</p><h3>${product.name}</h3><p>₦${Number(product.price).toLocaleString('en-NG')}</p><button class="add-to-cart" type="button"onclick="addToCart(${product.id}, '${product.name}', ${product.price}, ${product.vendor_id})">Add to Cart</button></div>`).join('');
-     
-  
-   console.log('Marketplace vendors:', vendors);
-   }
- let cart = [];
+async function loadMarketplace() {
+  let vendorsQuery = awSupabase
+    .from('vendors')
+    .select('*, locations(name)');
 
-function addToCart(productId, productName, productPrice, vendorId){ 
-  if (cart.length > 0 && cart[0].vendorId !== Number(vendorId)) {
-  alert('Please complete or clear your current vendor order before adding items from another vendor.');
-  return;
-}
- const existingItem = cart.find(item => item.id === productId);
+  if (selectedStateId) {
+    vendorsQuery = vendorsQuery.eq('state_id', selectedStateId);
+  }
 
-if (existingItem) {
-  existingItem.quantity += 1;
-} else {
-  cart.push({
-    id: productId,
-name: productName,
-price: Number(productPrice),
-vendorId: Number(vendorId),
-quantity: 1
-  });
-}
-  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.getElementById('cartCounter').textContent = '🛒 Cart (' +itemCount + ')';
-  alert('Added to cart! Cart now has ' + itemCount + ' item(s).');
-}
+  const { data: vendors, error } = await vendorsQuery;
 
-function openCart() {
+  const { data: products, error: productsError } = await awSupabase
+    .from('products')
+    .select('*');
+
+  if (productsError) {
+    console.error('Products error:', productsError);
+    return;
+  }
+
+  if (error) {
+    console.error('Marketplace error:', error);
+    return;
+  }
+
+  const vendorIds = vendors.map(vendor => vendor.id);
+
+  const locationProducts = products.filter(product =>
+    vendorIds.includes(product.vendor_id)
+  );
+
+  document.getElementById('marketplace').innerHTML = locationProducts.map(product => {
+    const vendor = vendors.find(vendor => vendor.id === product.vendor_id);
+
+    return `<div class="product-card">
+      <p class="vendor-name">${vendor?.business_name || 'Vendor'}</p>
+      <p class="vendor-location">📍 ${vendor?.city || selectedLocationName || 'Location'}</p>
+      <h3>${product.name}</h3>
+      <p>₦${Number(product.price).toLocaleString('en-NG')}</p>
+      <button class="add-to-cart" type="button" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, ${product.vendor_id})">Add to Cart</button>
+    </div>`;
+  }).join('');
+
+  console.log('Marketplace vendors:', vendors);
+  console.log('Marketplace products:', locationProducts);
+}
+let selectedStateId = null;
+let selectedLocationName = '';
+
+function setLocation(stateId, locationName) {
+  selectedStateId = stateId;
+  selectedLocationName = locationName;
+  loadMarketplace();
+}
+    function openCart() {
  const panel = document.getElementById('cartPanel');
 panel.style.display = 'block';
 panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br><button type="button" onclick="changeQuantity(' + item.id + ', -1)">−</button> <strong>' + item.quantity + '</strong> <button type="button" onclick="changeQuantity(' + item.id + ', 1)">+</button> <button type="button" onclick="removeItem(' + item.id + ')">Remove</button></p>').join('');
