@@ -1,329 +1,212 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#176B4D"><title>AW — Food, Gifts & Send Love Home</title>
-<style><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#176B4D">
+<title>AW — Food, Gifts & Send Love Home</title>
+<style>
 :root{--g:#176B4D;--d:#0E4B36;--y:#F4C95D;--c:#FFFBF3;--i:#20231f;--m:#6c716b}
 *{box-sizing:border-box}body{margin:0;background:var(--c);color:var(--i);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:82px}.top{position:sticky;top:0;background:#fffbf3f2;padding:14px 18px;display:flex;justify-content:space-between;z-index:5}.logo{font-size:28px;font-weight:900;color:var(--g)}button{border:0;font:inherit}.icon{border-radius:50%;background:white;width:42px;height:42px}
+.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:82px}.top{position:sticky;top:0;background:#fffbf3f2;padding:14px 18px;display:flex;justify-content:space-between;z-index:5}.logo{font-size:28px;font-weight:900;color:var(--g)}button{border:0;font:inherit;cursor:pointer}.icon{border-radius:50%;background:white;width:42px;height:42px}
 .hero{margin:10px 16px 18px;padding:24px;border-radius:26px;background:linear-gradient(145deg,var(--g),var(--d));color:white}.aw{color:var(--y);font-size:38px;font-weight:900}.hero h1{font-size:22px;margin:5px 0}.hero p{margin:0;color:#e7f0eb}.pill{display:inline-block;margin-top:16px;background:var(--y);color:#17261e;padding:9px 13px;border-radius:99px;font-weight:800}
-.section{padding:0 16px;margin:20px 0}.section h2{font-size:21px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:white;border-radius:20px;padding:18px;box-shadow:0 4px 20px #00000008}.big{grid-column:1/-1}.emoji{font-size:28px}.card h3{margin:8px 0 4px}.muted{color:var(--m);font-size:14px;line-height:1.4}.vendor{display:flex;align-items:center;gap:12px}.avatar{width:48px;height:48px;border-radius:15px;background:#e6f2eb;display:grid;place-items:center;font-size:23px}.arrow{margin-left:auto}.cta{width:100%;padding:14px;border-radius:14px;background:var(--g);color:white;font-weight:800;margin-top:14px}
+.section{padding:0 16px;margin:20px 0}.section h2{font-size:21px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:white;border-radius:20px;padding:18px;box-shadow:0 4px 20px #00000008}.big{grid-column:1/-1}.emoji{font-size:28px}.card h3{margin:8px 0 4px}.muted{color:var(--m);font-size:14px;line-height:1.4}.vendor{display:flex;align-items:center;gap:12px}.avatar{width:48px;height:48px;border-radius:15px;background:#e6f2eb;display:grid;place-items:center;font-size:23px}.arrow{margin-left:auto}.cta{width:100%;padding:14px;border-radius:14px;background:var(--g);color:white;font-weight:800;margin-top:14px}.secondary{background:white;color:var(--g);border:1px solid #d9ddd9}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);background:white;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 6px;z-index:10}.nav button{background:transparent;color:#747873;font-size:12px;padding:6px}.nav span{display:block;font-size:21px}.nav .active{color:var(--g);font-weight:800}
-.panel{padding:18px}.back{background:transparent;color:var(--g);font-weight:800;margin-bottom:15px}.field{width:100%;padding:14px;border:1px solid #d9ddd9;border-radius:13px;background:white;margin:7px 0;font:inherit}.state{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #eee}.active{color:#16834f;font-weight:800}.soon{color:#888}.notice{background:#fff4dc;border-radius:16px;padding:14px;margin:12px 0}.hidden{display:none}
-.product-card {
-  border: 2px solid #6b2d5c;
-  border-radius: 12px;
-  padding: 16px;
-  margin: 16px 0;
-}
+.panel{padding:18px}.back{background:transparent;color:var(--g);font-weight:800;margin-bottom:15px}.field{width:100%;padding:14px;border:1px solid #d9ddd9;border-radius:13px;background:white;margin:7px 0;font:inherit}.notice{background:#fff4dc;border-radius:16px;padding:14px;margin:12px 0}.hidden{display:none}.location-card{cursor:pointer;margin-bottom:12px}.product-card{background:white;border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:0 4px 20px #00000008}.product-card h3{margin:6px 0}.vendor-name{font-weight:800;margin:0}.vendor-location{color:var(--m);font-size:14px}.price{font-size:18px;font-weight:900}.status{padding:12px;border-radius:14px;background:#eef7f2;margin:12px 0}.cart-panel{background:white;border-radius:20px;padding:18px;margin-top:16px}.cart-row{padding:12px 0;border-bottom:1px solid #eee}.qty{padding:5px 10px;border-radius:8px;margin:0 4px}.remove{background:transparent;color:#9a3434}.empty{text-align:center;padding:24px;color:var(--m)}
 </style>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-</head><body>
-  <div class="app">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="app">
 <header class="top"><div class="logo">AW</div><button class="icon" onclick="show('locations')">📍</button></header>
+
 <main id="home">
-<section class="hero"><div class="aw">AW</div><h1>One app. Every state. One day.</h1><p>Food • Gifts • Send Love Home ❤️</p><span class="pill">Abuja — Available Now</span></section>
+<section class="hero"><div class="aw">AW</div><h1>Food, gifts and love — closer to home.</h1><p>London → Africa ❤️</p><span class="pill">Nigeria marketplace</span></section>
 <section class="section"><h2>What would you like to do?</h2><div class="grid">
-<div class="card big" onclick="show('love')"><div class="emoji">❤️</div><h3>Send Love Home</h3><div class="muted">Send food, gifts and a personal message to someone you love in Abuja.</div></div>
-<div class="card"><div class="emoji">🍲</div><h3>Order Food</h3><div class="muted">Discover Abuja vendors.</div></div>
-<div class="card"><div class="emoji">🎁</div><h3>Shop Gifts</h3><div class="muted">Make someone smile.</div></div></div></section>
-<section class="section"><h2>Shop by Location</h2><div class="card vendor" onclick="setLocation(1, 'Abuja')"><div class="avatar">📍</div><div><h3>Abuja</h3><div class="muted">Shop Abuja vendors</div></div><div class="arrow">›</div></div><br><div class="card vendor" onclick="setLocation(33, 'Port Harcourt')"><div class="avatar">📍</div><div><h3>Port Harcourt</h3><div class="muted">Shop Rivers vendors</div></div><div class="arrow">›</div></div></section></main>
-<section id="love" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>❤️ Send Love Home</h1><p class="muted">Start with Abuja. Your loved one can receive food or a gift while you are away.</p><div class="notice"><b>🇬🇧 London → 🇳🇬 Abuja</b><br><small>London customers can use AW to send love home.</small></div><input class="field" placeholder="Recipient's name"><select class="field"><option>Relationship</option><option>Mum</option><option>Dad</option><option>Partner</option><option>Child</option><option>Sibling</option><option>Friend</option></select><input class="field" placeholder="Recipient phone number"><textarea class="field" rows="3" placeholder="Your personal message ❤️"></textarea><button class="cta" onclick="alert('Send Love Home is ready for the next backend stage.')">Continue</button></section>
-<section id="vendor" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>🏪 Become an AW Vendor</h1><p class="muted">Free to join. Pay commission only after a completed sale.</p><input class="field" placeholder="Business name"><input class="field" placeholder="Your name"><input class="field" placeholder="Phone / WhatsApp"><input class="field" placeholder="Email"><input class="field" placeholder="What do you sell?"><select class="field"><option>Abuja / FCT — Available Now</option></select><textarea class="field" rows="3" placeholder="Tell AW about your business"></textarea><button class="cta" onclick="alert('Membership request ready for the AW admin backend.')">Send Membership Request</button></section>
-<section id="locations" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>🇳🇬 AW Locations</h1><p class="muted">Abuja is the first active marketplace. All other states are Coming Soon.</p><div id="states"></div></section>
-<nav class="nav"><button class="active" onclick="show('home',this)"><span>⌂</span>Home</button><button><span>🍲</span>Food</button><button onclick="show('love',this)"><span>🎁</span>Gifts</button><button onclick="show('vendor',this)"><span>🏪</span>Vendors</button></nav>
-</div><script>
-const s=['Abuja / FCT','Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno','Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','Gombe','Imo','Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa','Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'];document.getElementById('states').innerHTML=s.map((x,i)=>'<div class="state"><span>'+x+'</span><span class="'+(i?'soon':'active')+'">'+(i?'🔒 Coming Soon':'● Available')+'</span></div>').join('');
-function show(id,b){document.querySelectorAll('main,.panel').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(b){document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}scrollTo(0,0)}
-</script><<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co'; 
-    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz';
-    const awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-   let selectedStateId = null;
+<div class="card big" onclick="show('love')"><div class="emoji">❤️</div><h3>Send Love Home</h3><div class="muted">Send food, gifts and a personal message to someone you love.</div></div>
+<div class="card" onclick="show('locations')"><div class="emoji">🍲</div><h3>Order Food</h3><div class="muted">Discover vendors serving your location.</div></div>
+<div class="card" onclick="show('locations')"><div class="emoji">🎁</div><h3>Shop Gifts</h3><div class="muted">Find thoughtful gifts from local vendors.</div></div>
+</div></section>
+<section class="section"><h2>Shop by Location</h2>
+<div class="card vendor location-card" onclick="chooseLocation(1,'Abuja')"><div class="avatar">📍</div><div><h3>Abuja</h3><div class="muted">Shop Abuja vendors</div></div><div class="arrow">›</div></div>
+<div class="card vendor location-card" onclick="chooseLocation(33,'Port Harcourt')"><div class="avatar">📍</div><div><h3>Port Harcourt</h3><div class="muted">Shop Rivers vendors</div></div><div class="arrow">›</div></div>
+</section>
+<section class="section"><div class="card"><div class="emoji">🏪</div><h3>Sell on AW</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Become an AW Vendor</button></div></section>
+<section class="section"><div class="card"><h3>Continue as Guest</h3><div class="muted">Browse AW without creating an account.</div><button class="cta" onclick="continueAsGuest()">Continue as Guest</button><div id="guestStatus" class="muted"></div></div></section>
+</main>
+
+<section id="marketplacePanel" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1 id="marketplaceTitle">AW Marketplace</h1><p class="muted" id="marketplaceSubtitle">Choose a location to start shopping.</p><div id="marketplaceProducts"></div><div id="cartPanel" class="cart-panel hidden"></div><div id="checkoutPanel" class="cart-panel hidden"></div></section>
+
+<section id="love" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>❤️ Send Love Home</h1><p class="muted">Send food, gifts and a personal message from London to someone you love across AW's active African markets.</p><div class="notice"><b>🇬🇧 London → 🌍 Africa</b><br><small>Nigeria is AW's first live marketplace.</small></div><input class="field" placeholder="Recipient's name"><select class="field"><option>Relationship</option><option>Mum</option><option>Dad</option><option>Partner</option><option>Child</option><option>Sibling</option><option>Friend</option></select><input class="field" placeholder="Recipient phone number"><textarea class="field" rows="3" placeholder="Your personal message ❤️"></textarea><button class="cta" onclick="alert('Send Love Home is ready for its next backend stage.')">Continue</button></section>
+
+<section id="vendor" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>🏪 Sell on AW</h1><p class="muted">Free to join. Pay commission only after a completed sale. Vendors are reviewed by AW before becoming visible.</p><input class="field" placeholder="Business name"><input class="field" placeholder="Your name"><input class="field" placeholder="Phone / WhatsApp"><input class="field" placeholder="Email"><input class="field" placeholder="What do you sell?"><input class="field" placeholder="Business city / location"><textarea class="field" rows="3" placeholder="Tell AW about your business and delivery area"></textarea><button class="cta" onclick="alert('Vendor onboarding is ready for its next backend stage.')">Send Membership Request</button></section>
+
+<section id="locations" class="panel hidden"><button class="back" onclick="show('home')">‹ Back</button><h1>📍 Choose your location</h1><p class="muted">AW shows vendors and products available for the location you choose.</p><div class="card vendor location-card" onclick="chooseLocation(1,'Abuja')"><div class="avatar">📍</div><div><h3>Abuja</h3><div class="muted">Available for marketplace testing</div></div><div class="arrow">›</div></div><div class="card vendor location-card" onclick="chooseLocation(33,'Port Harcourt')"><div class="avatar">📍</div><div><h3>Port Harcourt</h3><div class="muted">Available for marketplace testing</div></div><div class="arrow">›</div></div></section>
+
+<nav class="nav"><button class="active" onclick="show('home',this)"><span>⌂</span>Home</button><button onclick="show('locations',this)"><span>🍲</span>Food</button><button onclick="show('love',this)"><span>🎁</span>Gifts</button><button onclick="show('vendor',this)"><span>🏪</span>Vendors</button></nav>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://nkzjhpeyvlyqcxtcqqvs.supabase.co/rest/v1/';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz';
+
+let awSupabase = null;
+let selectedStateId = null;
 let selectedLocationName = '';
+let cart = [];
 
-function setLocation(stateId, locationName) {
-  selectedStateId = stateId;
-  selectedLocationName = locationName;
-  loadMarketplace();
-}  
-    
-  async function continueAsGuest() {
-  const captchaToken = window.turnstile ? turnstile.getResponse() : '';
+function supabaseConfigured() {
+  return !SUPABASE_URL.includes('PASTE_YOUR_') && !SUPABASE_PUBLISHABLE_KEY.includes('PASTE_YOUR_');
+}
 
-  if (!captchaToken) {
-    alert('Please complete the security check first.');
+function getSupabase() {
+  if (!supabaseConfigured()) return null;
+  if (!awSupabase) awSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  return awSupabase;
+}
+
+function show(id,b) {
+  document.querySelectorAll('main,.panel').forEach(x => x.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  if (b) {
+    document.querySelectorAll('.nav button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+  }
+  window.scrollTo(0,0);
+}
+
+async function continueAsGuest() {
+  const client = getSupabase();
+  if (!client) {
+    alert('AW connection details still need to be added.');
     return;
   }
-
-  const { data, error } = await awSupabase.auth.signInAnonymously({
-    options: { captchaToken }
-  });
-
+  const status = document.getElementById('guestStatus');
+  status.textContent = 'Connecting…';
+  const { error } = await client.auth.signInAnonymously();
   if (error) {
+    console.error('Guest sign-in error:', error);
+    status.textContent = '';
     alert('Guest sign-in failed: ' + error.message);
     return;
   }
-
-  alert('Welcome to AW!');
-    window.location.hash = 'marketplace';
-    await loadMarketplace();
-}  
-async function loadMarketplace() {
-  let vendorsQuery = awSupabase
-    .from('vendors')
-    .select('*, locations(name)');
-
-  if (selectedStateId) {
-    vendorsQuery = vendorsQuery.eq('state_id', selectedStateId);
-  }
-
-  const { data: vendors, error } = await vendorsQuery;
-
-  if (error) {
-    console.error('Marketplace error:', error);
-    return;
-  }
-
-  const { data: products, error: productsError } = await awSupabase
-    .from('products')
-    .select('*');
-
-  if (productsError) {
-    console.error('Products error:', productsError);
-    return;
-  }
-
-  const vendorIds = (vendors || []).map(vendor => Number(vendor.id));
-
-  const locationProducts = (products || []).filter(product =>
-    vendorIds.includes(Number(product.vendor_id))
-  );
-
-  document.getElementById('marketplace').innerHTML = locationProducts.map(product => {
-    const vendor = vendors.find(
-      vendor => Number(vendor.id) === Number(product.vendor_id)
-    );
-
-    return `<div class="product-card">
-      <p class="vendor-name">${vendor?.business_name || 'Vendor'}</p>
-      <p class="vendor-location">📍 ${vendor?.city || selectedLocationName || 'Location'}</p>
-      <h3>${product.name}</h3>
-      <p>₦${Number(product.price).toLocaleString('en-NG')}</p>
-      <button class="add-to-cart" type="button" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, ${product.vendor_id})">Add to Cart</button>
-    </div>`;
-  }).join('');
-
- console.log('Marketplace vendors:', vendors);
-console.log('Marketplace products:', locationProducts);
+  status.textContent = 'Guest access ready ✓';
+  show('locations');
 }
 
-let cart = [];
+async function chooseLocation(stateId, locationName) {
+  selectedStateId = Number(stateId);
+  selectedLocationName = locationName;
+  show('marketplacePanel');
+  await loadMarketplace();
+}
 
-function addToCart(id, name, price, vendorId) {
-  const existingItem = cart.find(item => item.id === id);
+async function loadMarketplace() {
+  const productsBox = document.getElementById('marketplaceProducts');
+  document.getElementById('marketplaceTitle').textContent = selectedLocationName ? 'Shop ' + selectedLocationName : 'AW Marketplace';
+  document.getElementById('marketplaceSubtitle').textContent = selectedLocationName ? 'Showing available AW products in ' + selectedLocationName + '.' : 'Choose a location to start shopping.';
 
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({
-      id: id,
-      name: name,
-      price: Number(price),
-      vendorId: vendorId,
-      quantity: 1
-    });
+  const client = getSupabase();
+  if (!client) {
+    productsBox.innerHTML = '<div class="notice">AW connection details still need to be added before live products can load.</div>';
+    return;
   }
 
+  productsBox.innerHTML = '<div class="status">Loading marketplace…</div>';
+
+  let vendorsQuery = client.from('vendors').select('id,business_name,city,state_id,status,is_active');
+  if (selectedStateId) vendorsQuery = vendorsQuery.eq('state_id', selectedStateId);
+
+  const { data: vendors, error: vendorsError } = await vendorsQuery;
+  if (vendorsError) {
+    console.error('Marketplace vendor error:', vendorsError);
+    productsBox.innerHTML = '<div class="notice">We could not load vendors right now.</div>';
+    return;
+  }
+
+  const visibleVendors = (vendors || []).filter(vendor => vendor.status === 'approved' && vendor.is_active === true);
+  const vendorIds = visibleVendors.map(vendor => Number(vendor.id));
+
+  if (!vendorIds.length) {
+    productsBox.innerHTML = '<div class="empty">No active vendors are available in this location yet.</div>';
+    return;
+  }
+
+  const { data: products, error: productsError } = await client.from('products').select('*').in('vendor_id', vendorIds).eq('is_available', true);
+  if (productsError) {
+    console.error('Marketplace product error:', productsError);
+    productsBox.innerHTML = '<div class="notice">We could not load products right now.</div>';
+    return;
+  }
+
+  const locationProducts = products || [];
+  if (!locationProducts.length) {
+    productsBox.innerHTML = '<div class="empty">No available products are listed here yet.</div>';
+    return;
+  }
+
+  productsBox.innerHTML = locationProducts.map(product => {
+    const vendor = visibleVendors.find(v => Number(v.id) === Number(product.vendor_id));
+    const safeName = String(product.name || 'Product').replace(/'/g, '&#39;');
+    return `<div class="product-card">
+      <p class="vendor-name">${vendor?.business_name || 'AW Vendor'}</p>
+      <p class="vendor-location">📍 ${vendor?.city || selectedLocationName || 'Location'}</p>
+      <h3>${product.name || 'Product'}</h3>
+      <p class="muted">${product.description || ''}</p>
+      <p class="price">₦${Number(product.price || 0).toLocaleString('en-NG')}</p>
+      <button class="cta" type="button" onclick="addToCart(${Number(product.id)}, '${safeName}', ${Number(product.price || 0)}, ${Number(product.vendor_id)})">Add to Cart</button>
+    </div>`;
+  }).join('');
+}
+
+function addToCart(id, name, price, vendorId) {
+  const existing = cart.find(item => Number(item.id) === Number(id));
+  if (existing) existing.quantity += 1;
+  else cart.push({ id:Number(id), name, price:Number(price), vendorId:Number(vendorId), quantity:1 });
   openCart();
 }
 
-}    function openCart() {
- const panel = document.getElementById('cartPanel');
-panel.style.display = 'block';
-panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => '<p><strong>' + item.name + '</strong><br>₦' + item.price.toLocaleString('en-NG') + '<br><button type="button" onclick="changeQuantity(' + item.id + ', -1)">−</button> <strong>' + item.quantity + '</strong> <button type="button" onclick="changeQuantity(' + item.id + ', 1)">+</button> <button type="button" onclick="removeItem(' + item.id + ')">Remove</button></p>').join('');
-const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  panel.innerHTML += '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>';
-  panel.innerHTML += '<button type="button" onclick="startCheckout()">Proceed to Checkout</button>';
-    }
+function changeQuantity(id, amount) {
+  const item = cart.find(x => Number(x.id) === Number(id));
+  if (!item) return;
+  item.quantity += amount;
+  if (item.quantity <= 0) cart = cart.filter(x => Number(x.id) !== Number(id));
+  openCart();
+}
+
+function removeItem(id) {
+  cart = cart.filter(item => Number(item.id) !== Number(id));
+  openCart();
+}
+
+function openCart() {
+  const panel = document.getElementById('cartPanel');
+  panel.classList.remove('hidden');
+  if (!cart.length) {
+    panel.innerHTML = '<h3>Your Cart 🛒</h3><p class="muted">Your cart is empty.</p>';
+    return;
+  }
+  const total = cart.reduce((sum,item) => sum + item.price * item.quantity, 0);
+  panel.innerHTML = '<h3>Your Cart 🛒</h3>' + cart.map(item => `<div class="cart-row"><strong>${item.name}</strong><br>₦${item.price.toLocaleString('en-NG')} × ${item.quantity}<br><button class="qty" onclick="changeQuantity(${item.id},-1)">−</button><button class="qty" onclick="changeQuantity(${item.id},1)">+</button><button class="remove" onclick="removeItem(${item.id})">Remove</button></div>`).join('') + `<p><strong>Total: ₦${total.toLocaleString('en-NG')}</strong></p><button class="cta" onclick="startCheckout()">Proceed to Checkout</button>`;
+}
 
 function startCheckout() {
-  const checkoutPanel = document.getElementById('checkoutPanel');
-
-  checkoutPanel.style.display = 'block';
-  checkoutPanel.innerHTML =
-    '<h3>📍 Where should we deliver?</h3>' +
-    '<input type="text" id="deliveryAddress" placeholder="Enter delivery address or area">' +
-    '<br><br>' +
-    '<input type="text" id="deliveryCity" placeholder="City">' +
-    '<br><br>' +
-    '<button type="button" onclick="continueCheckout()">Continue</button>';
+  const panel = document.getElementById('checkoutPanel');
+  panel.classList.remove('hidden');
+  panel.innerHTML = '<h3>📍 Where should we deliver?</h3><input class="field" type="text" id="deliveryAddress" placeholder="Enter delivery address or area"><input class="field" type="text" id="deliveryCity" placeholder="City"><button class="cta" onclick="continueCheckout()">Continue</button>';
+  panel.scrollIntoView({behavior:'smooth'});
 }
 
 function continueCheckout() {
-  const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
-  const deliveryCity = document.getElementById('deliveryCity').value.trim();
-
-  if (!deliveryAddress || !deliveryCity) {
+  const address = document.getElementById('deliveryAddress')?.value.trim();
+  const city = document.getElementById('deliveryCity')?.value.trim();
+  if (!address || !city) {
     alert('Please enter the delivery address and city.');
     return;
   }
-
-  const checkoutPanel = document.getElementById('checkoutPanel');
-
-  checkoutPanel.dataset.deliveryAddress = deliveryAddress;
-  checkoutPanel.dataset.deliveryCity = deliveryCity;
-
-  checkoutPanel.innerHTML =
-    '<h3>👤 Who is receiving this order?</h3>' +
-    '<p><strong>📍 Delivering to:</strong><br>' +
-    deliveryAddress + ', ' + deliveryCity + '</p>' +
-    '<input type="text" id="recipientName" placeholder="Recipient name">' +
-    '<br><br>' +
-    '<input type="tel" id="recipientPhone" placeholder="Recipient phone number">' +
-    '<br><br>' +
-    '<button type="button" onclick="continueRecipient()">Continue</button>';
+  alert('Delivery details saved for testing. Payment is the next AW stage.');
 }
-function continueRecipient() {
-  const recipientName = document.getElementById('recipientName').value.trim();
-  const recipientPhone = document.getElementById('recipientPhone').value.trim();
-
-  if (!recipientName || !recipientPhone) {
-    alert('Please enter the recipient name and phone number.');
-    return;
-  }
-
-  const checkoutPanel = document.getElementById('checkoutPanel');
-  checkoutPanel.dataset.recipientName = recipientName;
-checkoutPanel.dataset.recipientPhone = recipientPhone;
-  const deliveryAddress = checkoutPanel.dataset.deliveryAddress || '';
-
-  const total = cart.reduce((sum, item) => {
-    return sum + (item.price * item.quantity);
-  }, 0);
-
-  const itemsHtml = cart.map(item => {
-    return '<p><strong>' + item.name + '</strong><br>' +
-      'Quantity: ' + item.quantity + '<br>' +
-      '₦' + (item.price * item.quantity).toLocaleString('en-NG') +
-      '</p>';
-  }).join('');
-
-  checkoutPanel.innerHTML =
-    '<h3>🧾 Order Summary</h3>' +
-    '<p><strong>📍 Delivering to:</strong><br>' + deliveryAddress + '</p>' +
-    '<p><strong>👤 Recipient:</strong><br>' + recipientName + '<br>' + recipientPhone + '</p>' +
-    '<hr>' +
-    itemsHtml +
-    '<hr>' +
-    '<p><strong>Total: ₦' + total.toLocaleString('en-NG') + '</strong></p>' +
-   '<button id="paymentButton" type="button" onclick="continueToPayment()">Continue to Payment</button>';
-}
-async function continueToPayment() {
-    const paymentButton = document.getElementById('paymentButton');
-
-  if (paymentButton && paymentButton.disabled) {
-    return;
-  }
-
- 
-  const checkoutPanel = document.getElementById('checkoutPanel');
-
-  const deliveryAddress = checkoutPanel.dataset.deliveryAddress || '';
-  const deliveryCity = checkoutPanel.dataset.deliveryCity || '';
-  const recipientName = checkoutPanel.dataset.recipientName || '';
-  const recipientPhone = checkoutPanel.dataset.recipientPhone || '';
-
-  const { data: { user }, error: userError } = await awSupabase.auth.getUser();
-
-  if (userError || !user) {
-    alert('Please sign in or continue as guest first.');
-    return;
-  }
-
-  if (cart.length === 0) {
-    alert('Your cart is empty.');
-    return;
-  }
- if (paymentButton) {
-    paymentButton.disabled = true;
-    paymentButton.textContent = 'Creating order...';
-  }
-  const secureItems = cart.map(item => ({
-    product_id: item.id,
-    quantity: item.quantity
-  }));
-let checkoutToken = checkoutPanel.dataset.checkoutToken;
-
-if (!checkoutToken) {
-  checkoutToken = crypto.randomUUID();
-  checkoutPanel.dataset.checkoutToken = checkoutToken;
-}
-  const { data, error } = await awSupabase.rpc('create_order_secure_once', {
-    p_items: secureItems,
-    p_delivery_name: recipientName,
-    p_delivery_phone: recipientPhone,
-    p_delivery_address: deliveryAddress,
-    p_delivery_city: deliveryCity,
-p_checkout_token: checkoutToken
-  });
-
-  if (error) {
-    console.error('Secure order error:', error);
-        if (paymentButton) {
-      paymentButton.disabled = false;
-      paymentButton.textContent = 'Continue to Payment';
-    }
-    alert('We could not create your order yet.');
-    return;
-  }
-
-  const order = data && data[0];
-
-  if (!order) {
-        if (paymentButton) {
-      paymentButton.disabled = false;
-      paymentButton.textContent = 'Continue to Payment';
-    }
-    alert('We could not confirm your order.');
-    return;
-  }
-
-  alert('AW order created successfully! Order #' + order.order_id);
-  
-}
-
-      function changeQuantity(productId, change) {
-  const item = cart.find(item => item.id === productId);
-  if (!item) return;
-
-  item.quantity += change;
-
-  if (item.quantity <= 0) {
-    cart = cart.filter(item => item.id !== productId);
-  }
-
-  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.getElementById('cartCounter').textContent = '🛒 Cart (' + itemCount + ')';
-  openCart();
-}
-    function removeItem(productId) {
-  cart = cart.filter(item => item.id !== productId);
-
-  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.getElementById('cartCounter').textContent = '🛒 Cart (' + itemCount + ')';
-
-  openCart();
-}
-    </script>
-
-    
-    
- 
-  <div class="cf-turnstile" data-sitekey="0x4AAAAAAEfo-Iw8pIYNVCUD">
-</div><button id="guestButton" type="button" onclick="continueAsGuest()">Continue as Guest</button>
-<div id="cartCounter" onclick="openCart()">🛒 Cart (0)</div>
-  <div id="cartPanel" style="display:none;"></div>
-  <div id="checkoutPanel" style="display:none;"></div>
-  <div id="marketplace"></div>
-  </body></html>
+</script>
+</body>
+</html>
