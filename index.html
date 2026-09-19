@@ -25,8 +25,11 @@
 
 <main id="home">
 <section class="hero"><div class="aw">AW</div><h1>Welcome to AW Nigerian Marketplace</h1><p>One App. 36 States. Connecting Hearts. ❤️</p><span class="pill">Food • Gifts • Fresh Produce • Snacks • Treats • Beauty & More</span></section>
-<section class="section"><div class="card"><h3>Welcome to AW</h3><div class="muted">Sign in, create an account, or continue as a guest.</div><section class="section"><div class="card"><h3>Shop AW</h3><div class="muted">Browse AW without creating an account.</div>
-<div class="cf-turnstile" data-sitekey="0x4AAAAAAEfo-Iw8pIYNVCUD"></div>
+<section class="section"><div class="card"><h3>Welcome to AW</h3><div class="muted">Sign in, create an account, or continue as a guest.</div>
+<div id="accountActions">
+<button class="cta" type="button" onclick="showSignIn()">Sign In</button>
+<button class="cta" type="button" onclick="showCreateAccount()">Create Account</button>
+</div><div class="cf-turnstile" data-sitekey="0x4AAAAAAEfo-Iw8pIYNVCUD"></div>
   <button class="cta" onclick="continueAsGuest()">Continue as Guest</button><div id="guestStatus" class="muted"></div></div></section>
 
 <section class="section"><h2>What would you like to do?</h2><div class="grid"><div class="card" onclick="show('locations')"><div class="emoji">🍲</div><h3>Shop Food &amp; Drinks</h3><div class="muted">Restaurants, cafés, groceries, meals, snacks and drinks from vendors serving your location.</div></div>
@@ -112,7 +115,82 @@ async function continueAsGuest() {
   show('locations');
 }
 
-async function chooseLocation(stateId, locationName) {
+function showSignIn() {
+  const existingForm = document.getElementById('accountForm');
+
+  if (existingForm) {
+    existingForm.remove();
+  }
+
+  const accountActions = document.getElementById('accountActions');
+
+  accountActions.insertAdjacentHTML('afterend', `
+    <div id="accountForm">
+      <input id="signInEmail" class="field" type="email" placeholder="Email address">
+      <input id="signInPassword" class="field" type="password" placeholder="Password">
+      <button class="cta" type="button" onclick="signInCustomer()">Sign In</button>
+      <div id="accountStatus" class="muted"></div>
+    </div>
+  `);
+}
+
+function showCreateAccount() {
+  const existingForm = document.getElementById('accountForm');
+
+  if (existingForm) {
+    existingForm.remove();
+  }
+
+  const accountActions = document.getElementById('accountActions');
+
+  accountActions.insertAdjacentHTML('afterend', `
+    <div id="accountForm">
+      <input id="createEmail" class="field" type="email" placeholder="Email address">
+      <input id="createPassword" class="field" type="password" placeholder="Create a password">
+      <button class="cta" type="button" onclick="createCustomerAccount()">Create Account</button>
+      <div id="accountStatus" class="muted"></div>
+    </div>
+  `);
+}
+ async function createCustomerAccount() {
+  const client = getSupabase();
+
+  if (!client) {
+    alert('AW connection details still need to be added.');
+    return;
+  }
+
+  const email = document.getElementById('createEmail').value.trim();
+  const password = document.getElementById('createPassword').value;
+  const status = document.getElementById('accountStatus');
+
+  if (!email || !password) {
+    status.textContent = 'Please enter your email and create a password.';
+    return;
+  }
+
+  status.textContent = 'Creating your AW account…';
+
+  const { data, error } = await client.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    console.error('Customer account creation error:', error);
+    status.textContent = error.message;
+    return;
+  }
+
+  if (data.session) {
+    status.textContent = 'AW account created ✓';
+    show('locations');
+    return;
+  }
+
+  status.textContent = 'Account created. Please check your email to confirm your account.';
+}
+  async function chooseLocation(stateId, locationName) {
   selectedStateId = Number(stateId);
   selectedLocationName = locationName;
   show('marketplacePanel');
