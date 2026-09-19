@@ -152,7 +152,48 @@ function showCreateAccount() {
     </div>
   `);
 }
- async function createCustomerAccount() {
+ async function signInCustomer() {
+  const client = getSupabase();
+
+  if (!client) {
+    alert('AW connection details still need to be added.');
+    return;
+  }
+
+  const email = document.getElementById('signInEmail').value.trim();
+  const password = document.getElementById('signInPassword').value;
+  const status = document.getElementById('accountStatus');
+
+  if (!email || !password) {
+    status.textContent = 'Please enter your email and password.';
+    return;
+  }
+
+  const captchaToken = window.turnstile ? window.turnstile.getResponse() : '';
+
+  if (!captchaToken) {
+    status.textContent = 'Please complete the security check first.';
+    return;
+  }
+
+  status.textContent = 'Signing in…';
+
+  const { error } = await client.auth.signInWithPassword({
+    email,
+    password,
+    options: { captchaToken }
+  });
+
+  if (error) {
+    console.error('Customer sign-in error:', error);
+    status.textContent = error.message;
+    return;
+  }
+
+  status.textContent = 'Welcome back to AW ✓';
+  show('locations');
+}
+  async function createCustomerAccount() {
   const client = getSupabase();
 
   if (!client) {
