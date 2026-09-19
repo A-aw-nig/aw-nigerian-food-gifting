@@ -169,11 +169,19 @@ function showCreateAccount() {
     return;
   }
 
+  const captchaToken = window.turnstile ? window.turnstile.getResponse() : '';
+
+  if (!captchaToken) {
+    status.textContent = 'Please complete the security check first.';
+    return;
+  }
+
   status.textContent = 'Creating your AW account…';
 
   const { data, error } = await client.auth.signUp({
     email,
-    password
+    password,
+    options: { captchaToken }
   });
 
   if (error) {
