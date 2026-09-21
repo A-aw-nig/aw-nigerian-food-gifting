@@ -193,7 +193,7 @@ function showCreateAccount() {
   status.textContent = 'Welcome back to AW ✓';
   show('locations');
 }
-  async function createCustomerAccount() {
+async function createCustomerAccount() {
   const client = getSupabase();
 
   if (!client) {
@@ -222,7 +222,10 @@ function showCreateAccount() {
   const { data, error } = await client.auth.signUp({
     email,
     password,
-    options: { captchaToken }
+    options: {
+      captchaToken,
+      emailRedirectTo: 'https://a-aw-nig.github.io/aw-nigerian-food-gifting/'
+    }
   });
 
   if (error) {
