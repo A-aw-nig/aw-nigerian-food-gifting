@@ -148,6 +148,7 @@ function showCreateAccount() {
       <input id="createEmail" class="field" type="email" placeholder="Email address">
       <input id="createPassword" class="field" type="password" placeholder="Create a password">
       <button class="cta" type="button" onclick="createCustomerAccount()">Create Account</button>
+      <button class="cta" type="button" onclick="resendCustomerConfirmation(document.getElementById('createEmail').value.trim())">Resend Confirmation Email</button>
       <div id="accountStatus" class="muted"></div>
     </div>
   `);
@@ -241,6 +242,34 @@ async function createCustomerAccount() {
   }
 
   status.textContent = 'Account created. Please check your email to confirm your account.';
+}
+ async function resendCustomerConfirmation(email) {
+  const client = getSupabase();
+
+  if (!client) {
+    alert('AW connection details still need to be added.');
+    return;
+  }
+
+  const status = document.getElementById('accountStatus');
+
+  status.textContent = 'Sending a new confirmation email…';
+
+  const { error } = await client.auth.resend({
+    type: 'signup',
+    email: email,
+    options: {
+      emailRedirectTo: 'https://a-aw-nig.github.io/aw-nigerian-food-gifting/'
+    }
+  });
+
+  if (error) {
+    console.error('Resend confirmation error:', error);
+    status.textContent = error.message;
+    return;
+  }
+
+  status.textContent = 'A new confirmation email has been sent. Please check your inbox.';
 }
   async function chooseLocation(stateId, locationName) {
   selectedStateId = Number(stateId);
