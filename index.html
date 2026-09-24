@@ -280,13 +280,17 @@ async function createCustomerAccount() {
 }
 async function loadLocations() {
   const locationCards = document.getElementById('locationCards');
+  const locationChoiceCards = document.getElementById('locationChoiceCards');
   const client = getSupabase();
 
-  if (!locationCards || !client) {
+  if ((!locationCards && !locationChoiceCards) || !client) {
     return;
   }
 
-  locationCards.innerHTML = '<div class="status">Loading AW locations…</div>';
+  const loadingMessage = '<div class="status">Loading AW locations…</div>';
+
+  if (locationCards) locationCards.innerHTML = loadingMessage;
+  if (locationChoiceCards) locationChoiceCards.innerHTML = loadingMessage;
 
   const { data: locations, error } = await client
     .from('locations')
@@ -296,16 +300,23 @@ async function loadLocations() {
 
   if (error) {
     console.error('AW location error:', error);
-    locationCards.innerHTML = '<div class="notice">We could not load AW locations right now.</div>';
+
+    const errorMessage = '<div class="notice">We could not load AW locations right now.</div>';
+
+    if (locationCards) locationCards.innerHTML = errorMessage;
+    if (locationChoiceCards) locationChoiceCards.innerHTML = errorMessage;
     return;
   }
 
   if (!locations || !locations.length) {
-    locationCards.innerHTML = '<div class="empty">No AW locations are available yet.</div>';
+    const emptyMessage = '<div class="empty">No AW locations are available yet.</div>';
+
+    if (locationCards) locationCards.innerHTML = emptyMessage;
+    if (locationChoiceCards) locationChoiceCards.innerHTML = emptyMessage;
     return;
   }
 
-  locationCards.innerHTML = locations.map(location => {
+  const cards = locations.map(location => {
     const displayLocation = location.city || location.name;
     const safeLocation = String(displayLocation).replace(/'/g, '&#39;');
 
@@ -318,8 +329,10 @@ async function loadLocations() {
       <div class="arrow">›</div>
     </div>`;
   }).join('');
-}
 
+  if (locationCards) locationCards.innerHTML = cards;
+  if (locationChoiceCards) locationChoiceCards.innerHTML = cards;
+}
   async function loadMarketplace() {
   const productsBox = document.getElementById('marketplaceProducts');
   document.getElementById('marketplaceTitle').textContent = selectedLocationName ? 'Shop ' + selectedLocationName : 'AW Marketplace';
