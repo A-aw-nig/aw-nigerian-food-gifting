@@ -34,9 +34,11 @@
 <section class="section"><h2>What would you like to do?</h2><div class="grid"><div class="card" onclick="show('locations')"><div class="emoji">🍲</div><h3>Shop Food &amp; Drinks</h3><div class="muted">Restaurants, cafés, groceries, meals, snacks and drinks from vendors serving your location.</div></div>
 </div></section>
 
-<section class="section"><h2>Shop by Location</h2>
-<div class="card vendor location-card" onclick="chooseLocation(1,'Abuja')"><div class="avatar">📍</div><div><h3>Abuja</h3><div class="muted">Shop Abuja vendors</div></div><div class="arrow">›</div></div>
-<div class="card vendor location-card" onclick="chooseLocation(33,'Port Harcourt')"><div class="avatar">📍</div><div><h3>Port Harcourt</h3><div class="muted">Shop Rivers vendors</div></div><div class="arrow">›</div></div>
+<section class="section">
+  <h2>Shop by Location</h2>
+  <div id="locationCards">
+    <div class="status">Loading AW locations…</div>
+  </div>
 </section>
 <section class="section"><div class="card"><div class="emoji">🏪</div><h3>Sell on AW</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Become an AW Vendor</button></div></section>
 </main>
@@ -276,8 +278,49 @@ async function createCustomerAccount() {
   show('marketplacePanel');
   await loadMarketplace();
 }
+async function loadLocations() {
+  const locationCards = document.getElementById('locationCards');
+  const client = getSupabase();
 
-async function loadMarketplace() {
+  if (!locationCards || !client) {
+    return;
+  }
+
+  locationCards.innerHTML = '<div class="status">Loading AW locations…</div>';
+
+  const { data: locations, error } = await client
+    .from('locations')
+    .select('id,name,city,is_active')
+    .eq('is_active', true)
+    .order('id');
+
+  if (error) {
+    console.error('AW location error:', error);
+    locationCards.innerHTML = '<div class="notice">We could not load AW locations right now.</div>';
+    return;
+  }
+
+  if (!locations || !locations.length) {
+    locationCards.innerHTML = '<div class="empty">No AW locations are available yet.</div>';
+    return;
+  }
+
+  locationCards.innerHTML = locations.map(location => {
+    const displayLocation = location.city || location.name;
+    const safeLocation = String(displayLocation).replace(/'/g, '&#39;');
+
+    return `<div class="card vendor location-card" onclick="chooseLocation(${Number(location.id)}, '${safeLocation}')">
+      <div class="avatar">📍</div>
+      <div>
+        <h3>${displayLocation}</h3>
+        <div class="muted">Shop ${displayLocation} vendors</div>
+      </div>
+      <div class="arrow">›</div>
+    </div>`;
+  }).join('');
+}
+
+  async function loadMarketplace() {
   const productsBox = document.getElementById('marketplaceProducts');
   document.getElementById('marketplaceTitle').textContent = selectedLocationName ? 'Shop ' + selectedLocationName : 'AW Marketplace';
   document.getElementById('marketplaceSubtitle').textContent = selectedLocationName ? 'Showing available AW products in ' + selectedLocationName + '.' : 'Choose a location to start shopping.';
@@ -382,6 +425,7 @@ function continueCheckout() {
   }
   alert('Delivery details saved for testing. Payment is the next AW stage.');
 }
+loadLocations();
 </script>
 </body>
 </html>
