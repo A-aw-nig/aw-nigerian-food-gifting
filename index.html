@@ -144,8 +144,7 @@ function showCreateAccount() {
       <input id="createEmail" class="field" type="email" placeholder="Email address">
       <input id="createPassword" class="field" type="password" placeholder="Create a password">
       <button class="cta" type="button" onclick="createCustomerAccount()">Create Account</button>
-      <button class="cta" type="button" onclick="resendCustomerConfirmation(document.getElementById('createEmail').value.trim())">Resend Confirmation Email</button>
-      <div id="accountStatus" class="muted"></div>
+     <button id="resendConfirmationButton" class="cta" type="button" style="display:none;" onclick="resendCustomerConfirmation(document.getElementById('createEmail').value.trim())">Resend Confirmation Email</button>      <div id="accountStatus" class="muted"></div>
     </div>
   `);
 }
@@ -231,13 +230,18 @@ async function createCustomerAccount() {
     return;
   }
 
-  if (data.session) {
-    status.textContent = 'AW account created ✓';
-    show('locations');
-    return;
-  }
+ if (data.session) {
+  status.textContent = 'AW account created ✓';
+  show('locations');
+  return;
+}
 
-  status.textContent = 'Account created. Please check your email to confirm your account.';
+status.textContent = 'Account created. Please check your email to confirm your account.';
+
+const resendButton = document.getElementById('resendConfirmationButton');
+if (resendButton) {
+  resendButton.style.display = 'block';
+}
 }
  async function resendCustomerConfirmation(email) {
   const client = getSupabase();
