@@ -455,18 +455,150 @@ function openCart() {
 function startCheckout() {
   const panel = document.getElementById('checkoutPanel');
   panel.classList.remove('hidden');
-  panel.innerHTML = '<h3>📍 Where should we deliver?</h3><input class="field" type="text" id="deliveryAddress" placeholder="Enter delivery address or area"><input class="field" type="text" id="deliveryCity" placeholder="City"><button class="cta" onclick="continueCheckout()">Continue</button>';
-  panel.scrollIntoView({behavior:'smooth'});
+
+  panel.innerHTML = `
+    <h3>📍 Where should we deliver?</h3>
+
+    <input
+      class="field"
+      type="text"
+      id="deliveryName"
+      placeholder="Delivery name"
+    >
+
+    <input
+      class="field"
+      type="tel"
+      id="deliveryPhone"
+      placeholder="Phone number"
+    >
+
+    <input
+      class="field"
+      type="text"
+      id="deliveryAddress"
+      placeholder="Enter delivery address or area"
+    >
+
+    <input
+      class="field"
+      type="text"
+      id="deliveryCity"
+      placeholder="City"
+    >
+
+    <button class="cta" type="button" onclick="continueCheckout()">
+      Continue
+    </button>
+  `;
+
+  panel.scrollIntoView({ behavior: 'smooth' });
 }
 
-function continueCheckout() {
-  const address = document.getElementById('deliveryAddress')?.value.trim();
-  const city = document.getElementById('deliveryCity')?.value.trim();
-  if (!address || !city) {
-    alert('Please enter the delivery address and city.');
+async function continueCheckout() {
+  const client = getSupabase();
+
+  if (!client) {
+    alert('AW connection details still need to be added.');
     return;
   }
-  alert('Delivery details saved for testing. Payment is the next AW stage.');
+
+  const name = document.getElementById('deliveryName')?.value.trim();
+  const phone = document.getElementById('deliveryPhone')?.value.trim();
+  const address = document.getElementById('deliveryAddress')?.value.trim();
+  const city = document.getElementById('deliveryCity')?.value.trim();
+
+  if (!name || !phone || !address || !city) {
+    alert('Please complete all delivery details.');
+    return;
+  }
+
+  if (!cart.length) {
+    alert('Your cart is empty.');
+    return;
+  }
+
+  const vendorIds = [...new Set(cart.map(item => Number(item.vendorId)))];
+
+  if (vendorIds.length !== 1) {
+    alert('Please checkout products from one AW vendor at a time.');
+    return;
+  }
+
+  const vendorId = vendorIds[0];
+
+  const {
+    data: { user },
+    error: userError
+  } = await client.auth.getUser();
+
+  if (userError || !user) {
+    console.error('AW customer lookup error:', userError);
+    alert('Please sign in or continue as guest before placing your order.');
+    return;
+  }
+
+  const subtotal = cart.reduce(
+    (sum, item) => sum + Number(item.price) * Number(item.quantity),
+    0
+  );
+
+  const deliveryFee = 0;
+  const totalAmount = subtotal + deliveryFee;
+
+  const {
+    data: order,
+    error: orderError
+  } = await client
+    .from('orders')
+    .insert({
+      customer_id: user.id,
+      vendor_id: vendorId,
+      status: 'pending',
+      delivery_name: name,
+      delivery_phone: phone,
+      delivery_address: address,
+      delivery_city: city,
+      delivery_state_id: selectedStateId || null,
+      subtotal: subtotal,
+      delivery_fee: deliveryFee,
+      total_amount: totalAmount
+    })
+    .select()
+    .single();
+
+  if (orderError) {
+    console.error('AW order creation error:', orderError);
+    alert('We could not create your AW order. Please try again.');
+    return;
+  }
+
+  const orderItems = cart.map(item => ({
+    order_id: order.id,
+    product_id: Number(item.id),
+    quantity: Number(item.quantity),
+    unit_price: Number(item.price)
+  }));
+
+  const { error: itemsError } = await client
+    .from('order_items')
+    .insert(orderItems);
+
+  if (itemsError) {
+    console.error('AW order items error:', itemsError);
+    alert('Your order was started, but AW could not save the order items. Please contact AW support.');
+    return;
+  }
+
+  alert('AW order created successfully. Payment is the next stage.');
+
+  cart = [];
+
+  document.getElementById('cartPanel').innerHTML =
+    '<h3>Your Cart 🛒</h3><p class="muted">Your cart is empty.</p>';
+
+  document.getElementById('checkoutPanel').innerHTML =
+    '<div class="notice"><strong>Order created ✓</strong><br>Your AW order has been saved. Payment is the next stage.</div>';
 }
 loadLocations();
 </script>
