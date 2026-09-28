@@ -468,6 +468,14 @@ function startCheckout() {
 
     <input
       class="field"
+      type="email"
+      id="deliveryEmail"
+      placeholder="Email address"
+      autocomplete="email"
+    >
+
+    <input
+      class="field"
       type="tel"
       id="deliveryPhone"
       placeholder="Phone number"
@@ -494,7 +502,6 @@ function startCheckout() {
 
   panel.scrollIntoView({ behavior: 'smooth' });
 }
-
 async function continueCheckout() {
   const client = getSupabase();
 
@@ -504,12 +511,20 @@ async function continueCheckout() {
   }
 
   const name = document.getElementById('deliveryName')?.value.trim();
+  const email = document.getElementById('deliveryEmail')?.value.trim();
   const phone = document.getElementById('deliveryPhone')?.value.trim();
   const address = document.getElementById('deliveryAddress')?.value.trim();
   const city = document.getElementById('deliveryCity')?.value.trim();
 
-  if (!name || !phone || !address || !city) {
-    alert('Please complete all delivery details.');
+  if (!name || !email || !phone || !address || !city) {
+    alert('Please complete all delivery details, including your email address.');
+    return;
+  }
+
+  const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!emailIsValid) {
+    alert('Please enter a valid email address.');
     return;
   }
 
