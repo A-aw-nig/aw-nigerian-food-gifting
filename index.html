@@ -605,15 +605,29 @@ async function continueCheckout() {
     return;
   }
 
-  alert('AW order created successfully. Payment is the next stage.');
+  const {
+    data: paymentData,
+    error: paymentError
+  } = await client.functions.invoke('aw-paystack-initialize', {
+    body: {
+      order_id: order.id,
+      email: email
+    }
+  });
 
-  cart = [];
+  if (paymentError) {
+    console.error('AW payment initialization error:', paymentError);
+    alert('Your AW order was saved, but payment could not start. Please try again.');
+    return;
+  }
 
-  document.getElementById('cartPanel').innerHTML =
-    '<h3>Your Cart 🛒</h3><p class="muted">Your cart is empty.</p>';
+  if (!paymentData?.authorization_url) {
+    console.error('AW payment response error:', paymentData);
+    alert('Your AW order was saved, but Paystack did not return a payment page.');
+    return;
+  }
 
-  document.getElementById('checkoutPanel').innerHTML =
-    '<div class="notice"><strong>Order created ✓</strong><br>Your AW order has been saved. Payment is the next stage.</div>';
+  window.location.href = paymentData.authorization_url;
 }
 loadLocations();
 </script>
