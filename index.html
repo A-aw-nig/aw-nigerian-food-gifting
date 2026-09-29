@@ -629,7 +629,63 @@ async function continueCheckout() {
 
   window.location.href = paymentData.authorization_url;
 }
-loadLocations();
+async function verifyPaystackReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const reference =
+    params.get('reference') ||
+    params.get('trxref');
+
+  if (!reference) {
+    return;
+  }
+
+  const client = getSupabase();
+
+  if (!client) {
+    console.error('AW connection details are unavailable for payment verification.');
+    return;
+  }
+
+  try {
+    const {
+      data,
+      error
+    } = await client.functions.invoke('aw-paystack-verify', {
+      body: {
+        reference: reference
+      }
+    });
+
+    if (error) {
+      console.error('AW payment verification error:', error);
+      alert('AW could not verify your payment yet. Please contact AW support before trying to pay again.');
+      return;
+    }
+
+    if (!data?.verified) {
+      console.error('AW payment was not verified:', data);
+      alert('AW could not confirm this payment.');
+      return;
+    }
+
+    alert('Payment verified successfully. Your AW order is now paid ✓');
+
+    const cleanUrl =
+      window.location.origin +
+      window.location.pathname +
+      window.location.hash;
+
+    window.history.replaceState({}, document.title, cleanUrl);
+
+  } catch (error) {
+    console.error('AW payment return error:', error);
+    alert('AW could not verify your payment yet. Please contact AW support before trying to pay again.');
+  }
+}
+
+verifyPaystackReturn();
+ 
+  loadLocations();
 </script>
 </body>
 </html>
