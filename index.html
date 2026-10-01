@@ -458,12 +458,56 @@ function startCheckout() {
 
   panel.innerHTML = `
     <h3>📍 Where should we deliver?</h3>
+    <div class="recipient-choice">
+  <p><strong>Who is this order for?</strong></p>
+
+  <label>
+    <input
+      type="radio"
+      name="orderFor"
+      value="myself"
+      checked
+    >
+    Myself
+  </label>
+
+  <label>
+    <input
+      type="radio"
+      name="orderFor"
+      value="someoneElse"
+    >
+    Someone else 🎁
+  </label>
+</div>
+</div>
+
+<script>
+  document.querySelectorAll('input[name="orderFor"]').forEach((option) => {
+    option.addEventListener('change', function () {
+      const nameField = document.getElementById('deliveryName');
+
+      if (this.value === 'someoneElse') {
+        nameField.placeholder = 'Recipient name';
+      } else {
+        nameField.placeholder = 'Your name';
+      }
+    });
+  });
+</script>
+
+<input
+  class="field"
+  type="text"
+  id="deliveryName"
+  placeholder="Recipient name"
+>
 
     <input
       class="field"
       type="text"
       id="deliveryName"
-      placeholder="Delivery name"
+      placeholder="Recipient name"
     >
 
     <input
