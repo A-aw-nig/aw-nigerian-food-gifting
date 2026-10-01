@@ -611,6 +611,7 @@ async function continueCheckout() {
 
   const deliveryFee = 0;
   const totalAmount = subtotal + deliveryFee;
+  const orderFor = document.querySelector('input[name="orderFor"]:checked')?.value || 'myself';
 
   const {
     data: order,
@@ -621,6 +622,7 @@ async function continueCheckout() {
       customer_id: user.id,
       vendor_id: vendorId,
       status: 'pending',
+      order_for: orderFor,
       delivery_name: name,
       delivery_phone: phone,
       delivery_address: address,
