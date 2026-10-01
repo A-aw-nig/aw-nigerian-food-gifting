@@ -467,6 +467,7 @@ function startCheckout() {
       name="orderFor"
       value="myself"
       checked
+      onchange="updateOrderFor()"
     >
     Myself
   </label>
@@ -476,6 +477,7 @@ function startCheckout() {
       type="radio"
       name="orderFor"
       value="someoneElse"
+      onchange="updateOrderFor()"
     >
     Someone else 🎁
   </label>
@@ -526,6 +528,20 @@ function startCheckout() {
 
   panel.scrollIntoView({ behavior: 'smooth' });
 }
+ function updateOrderFor() {
+  const selected = document.querySelector('input[name="orderFor"]:checked');
+  const nameField = document.getElementById('deliveryName');
+
+  if (!selected || !nameField) return;
+
+  if (selected.value === 'someoneElse') {
+    nameField.placeholder = 'Recipient name';
+    nameField.value = '';
+  } else {
+    nameField.placeholder = 'Your name';
+    nameField.value = '';
+  }
+} 
 async function continueCheckout() {
   const client = getSupabase();
 
