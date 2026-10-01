@@ -481,19 +481,6 @@ function startCheckout() {
   </label>
 </div>
 
-<script>
-  document.querySelectorAll('input[name="orderFor"]').forEach((option) => {
-    option.addEventListener('change', function () {
-      const nameField = document.getElementById('deliveryName');
-
-      if (this.value === 'someoneElse') {
-        nameField.placeholder = 'Recipient name';
-      } else {
-        nameField.placeholder = 'Your name';
-      }
-    });
-  });
-</script>
 
 <input
   class="field"
@@ -502,13 +489,7 @@ function startCheckout() {
   placeholder="Recipient name"
 >
 
-    <input
-      class="field"
-      type="text"
-      id="deliveryName"
-      placeholder="Recipient name"
-    >
-
+  
     <input
       class="field"
       type="email"
