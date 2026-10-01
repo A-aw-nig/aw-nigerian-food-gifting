@@ -528,20 +528,31 @@ function startCheckout() {
 
   panel.scrollIntoView({ behavior: 'smooth' });
 }
- function updateOrderFor() {
+function updateOrderFor() {
   const selected = document.querySelector('input[name="orderFor"]:checked');
+
   const nameField = document.getElementById('deliveryName');
+  const emailField = document.getElementById('deliveryEmail');
+  const phoneField = document.getElementById('deliveryPhone');
+  const addressField = document.getElementById('deliveryAddress');
+  const cityField = document.getElementById('deliveryCity');
 
   if (!selected || !nameField) return;
 
   if (selected.value === 'someoneElse') {
     nameField.placeholder = 'Recipient name';
-    nameField.value = '';
+    emailField.placeholder = 'Recipient email address';
+    phoneField.placeholder = 'Recipient phone number';
+    addressField.placeholder = 'Recipient delivery address or area';
+    cityField.placeholder = 'Recipient city';
   } else {
     nameField.placeholder = 'Your name';
-    nameField.value = '';
+    emailField.placeholder = 'Email address';
+    phoneField.placeholder = 'Phone number';
+    addressField.placeholder = 'Enter delivery address or area';
+    cityField.placeholder = 'City';
   }
-} 
+}
 async function continueCheckout() {
   const client = getSupabase();
 
