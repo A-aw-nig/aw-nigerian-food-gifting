@@ -166,6 +166,11 @@ async function loadVendorOrders() {
     ✅ Confirm Order
   </button>
 ` : ''}
+${order.status === 'confirmed' ? `
+  <button class="cta" type="button" onclick="updateVendorOrderStatus(${order.id}, 'preparing')">
+    👩‍🍳 Start Preparing
+  </button>
+` : ''}
     </div>
   `).join('');
 }
@@ -181,24 +186,30 @@ async function loadVendorOrders() {
     return;
   }
 
-  if (newStatus !== 'confirmed') {
-    alert('Invalid order status.');
-    return;
-  }
+ const allowedTransitions = {
+  confirmed: 'paid',
+  preparing: 'confirmed'
+};
 
-  const { error } = await client
-    .from('orders')
-    .update({ status: newStatus })
-    .eq('id', orderId)
-    .eq('status', 'paid');
+const requiredCurrentStatus = allowedTransitions[newStatus];
 
+if (!requiredCurrentStatus) {
+  alert('Invalid order status.');
+  return;
+}
+
+const { error } = await client
+  .from('orders')
+  .update({ status: newStatus })
+  .eq('id', orderId)
+  .eq('status', requiredCurrentStatus);
   if (error) {
     console.error('AW vendor order update error:', error);
     alert('We could not update this order.');
     return;
   }
 
-  alert('Order confirmed ✓');
+ alert(newStatus === 'preparing' ? 'Order is now being prepared 👩‍🍳' : 'Order confirmed ✓');
   await loadVendorOrders();
 } 
 async function continueAsGuest() {
