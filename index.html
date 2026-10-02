@@ -116,9 +116,54 @@ function show(id,b) {
     document.querySelectorAll('.nav button').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
   }
-  window.scrollTo(0,0);
-}
+window.scrollTo(0,0);
 
+if (id === 'vendorOrders') {
+  loadVendorOrders();
+}
+}
+async function loadVendorOrders() {
+  const client = getSupabase();
+  const list = document.getElementById('vendorOrdersList');
+
+  if (!client || !list) return;
+
+  list.innerHTML = '<p class="muted">Loading your orders...</p>';
+
+  const { data: { user }, error: userError } = await client.auth.getUser();
+
+  if (userError || !user || user.is_anonymous) {
+    list.innerHTML = '<p class="muted">Please sign in with your vendor account to view orders.</p>';
+    return;
+  }
+
+  const { data: orders, error } = await client
+    .from('orders')
+    .select('id, status, order_for, delivery_name, delivery_city, total_amount, created_at')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('AW vendor orders error:', error);
+    list.innerHTML = '<p class="muted">We could not load your vendor orders.</p>';
+    return;
+  }
+
+  if (!orders || orders.length === 0) {
+    list.innerHTML = '<p class="muted">No orders yet.</p>';
+    return;
+  }
+
+  list.innerHTML = orders.map(order => `
+    <div class="card">
+      <strong>Order #${order.id}</strong>
+      <p>Status: ${order.status}</p>
+      <p>For: ${order.order_for === 'someoneElse' ? 'Someone else 🎁' : 'Myself'}</p>
+      <p>Recipient: ${order.delivery_name || '-'}</p>
+      <p>City: ${order.delivery_city || '-'}</p>
+      <p>Total: ₦${Number(order.total_amount || 0).toLocaleString('en-NG')}</p>
+    </div>
+  `).join('');
+}
 async function continueAsGuest() {
   const client = getSupabase();
 
