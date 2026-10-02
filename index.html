@@ -161,9 +161,46 @@ async function loadVendorOrders() {
       <p>Recipient: ${order.delivery_name || '-'}</p>
       <p>City: ${order.delivery_city || '-'}</p>
       <p>Total: ₦${Number(order.total_amount || 0).toLocaleString('en-NG')}</p>
+      ${order.status === 'paid' ? `
+  <button class="cta" type="button" onclick="updateVendorOrderStatus(${order.id}, 'confirmed')">
+    ✅ Confirm Order
+  </button>
+` : ''}
     </div>
   `).join('');
 }
+ async function updateVendorOrderStatus(orderId, newStatus) {
+  const client = getSupabase();
+
+  if (!client) return;
+
+  const { data: { user }, error: userError } = await client.auth.getUser();
+
+  if (userError || !user || user.is_anonymous) {
+    alert('Please sign in with your vendor account.');
+    return;
+  }
+
+  if (newStatus !== 'confirmed') {
+    alert('Invalid order status.');
+    return;
+  }
+
+  const { error } = await client
+    .from('orders')
+    .update({ status: newStatus })
+    .eq('id', orderId)
+    .eq('status', 'paid');
+
+  if (error) {
+    console.error('AW vendor order update error:', error);
+    alert('We could not update this order.');
+    return;
+  }
+
+  alert('Order confirmed ✓');
+  await loadVendorOrders();
+} 
 async function continueAsGuest() {
   const client = getSupabase();
 
