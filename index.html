@@ -176,6 +176,11 @@ ${order.status === 'preparing' ? `
     🛵 Out for Delivery
   </button>
 ` : ''}
+${order.status === 'out_for_delivery' ? `
+  <button class="cta" type="button" onclick="updateVendorOrderStatus(${order.id}, 'delivered')">
+    ❤️ Mark as Delivered
+  </button>
+` : ''}
     </div>
   `).join('');
 }
@@ -194,7 +199,8 @@ ${order.status === 'preparing' ? `
 const allowedTransitions = {
   confirmed: 'paid',
   preparing: 'confirmed',
-  out_for_delivery: 'preparing'
+  out_for_delivery: 'preparing',
+  delivered: 'out_for_delivery'
 };
 
 const requiredCurrentStatus = allowedTransitions[newStatus];
@@ -215,10 +221,11 @@ const { error } = await client
     return;
   }
 
- const statusMessages = {
+const statusMessages = {
   confirmed: 'Order confirmed ✓',
   preparing: 'Order is now being prepared 👩‍🍳',
-  out_for_delivery: 'Order is now out for delivery 🛵'
+  out_for_delivery: 'Order is now out for delivery 🛵',
+  delivered: 'Order delivered successfully ❤️'
 };
 
 alert(statusMessages[newStatus] || 'Order updated ✓');
