@@ -171,6 +171,11 @@ ${order.status === 'confirmed' ? `
     👩‍🍳 Start Preparing
   </button>
 ` : ''}
+${order.status === 'preparing' ? `
+  <button class="cta" type="button" onclick="updateVendorOrderStatus(${order.id}, 'out_for_delivery')">
+    🛵 Out for Delivery
+  </button>
+` : ''}
     </div>
   `).join('');
 }
@@ -186,9 +191,10 @@ ${order.status === 'confirmed' ? `
     return;
   }
 
- const allowedTransitions = {
+const allowedTransitions = {
   confirmed: 'paid',
-  preparing: 'confirmed'
+  preparing: 'confirmed',
+  out_for_delivery: 'preparing'
 };
 
 const requiredCurrentStatus = allowedTransitions[newStatus];
@@ -209,8 +215,14 @@ const { error } = await client
     return;
   }
 
- alert(newStatus === 'preparing' ? 'Order is now being prepared 👩‍🍳' : 'Order confirmed ✓');
-  await loadVendorOrders();
+ const statusMessages = {
+  confirmed: 'Order confirmed ✓',
+  preparing: 'Order is now being prepared 👩‍🍳',
+  out_for_delivery: 'Order is now out for delivery 🛵'
+};
+
+alert(statusMessages[newStatus] || 'Order updated ✓');
+   await loadVendorOrders();
 } 
 async function continueAsGuest() {
   const client = getSupabase();
