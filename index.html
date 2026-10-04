@@ -119,20 +119,32 @@ function getSupabase() {
   return awSupabase;
 }
 
-function show(id,b) {
-  document.querySelectorAll('main,.panel').forEach(x => x.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+function show(id, b) {
+  document.querySelectorAll('main, .panel').forEach(x => x.classList.add('hidden'));
+
+  const page = document.getElementById(id);
+
+  if (!page) {
+    console.error('AW page not found:', id);
+    return;
+  }
+
+  page.classList.remove('hidden');
+
   if (b) {
     document.querySelectorAll('.nav button').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
   }
-window.scrollTo(0,0);
 
-if (id === 'vendorOrders') {
-  loadVendorOrders();
-}
+  window.scrollTo(0, 0);
+
+  if (id === 'vendorOrders') {
+    loadVendorOrders();
+  }
+
   if (id === 'customerOrders') {
-  loadCustomerOrders();
+    loadCustomerOrders();
+  }
 }
 }
 async function loadVendorOrders() {
