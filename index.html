@@ -120,8 +120,8 @@ function getSupabase() {
 }
 
 function show(id, b) {
- document.querySelectorAll('main, section.panel').forEach(x => x.classList.add('hidden'));
-
+ document.querySelectorAll('section.panel').forEach(x => x.classList.add('hidden'));
+document.getElementById('home').classList.remove('hidden');
   const page = document.getElementById(id);
 
   if (!page) {
