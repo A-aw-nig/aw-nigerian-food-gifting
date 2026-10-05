@@ -405,19 +405,14 @@ function showCreateAccount() {
     return;
   }
 
-  const captchaToken = window.turnstile ? window.turnstile.getResponse() : '';
 
-  if (!captchaToken) {
-    status.textContent = 'Please complete the security check first.';
-    return;
-  }
 
   status.textContent = 'Signing in…';
 
   const { error } = await client.auth.signInWithPassword({
     email,
     password,
-    options: { captchaToken }
+  
   });
 
   if (error) {
