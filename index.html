@@ -441,12 +441,7 @@ async function createCustomerAccount() {
     return;
   }
 
-  const captchaToken = window.turnstile ? window.turnstile.getResponse() : '';
-
-  if (!captchaToken) {
-    status.textContent = 'Please complete the security check first.';
-    return;
-  }
+ 
 
   status.textContent = 'Creating your AW account…';
 
@@ -454,7 +449,7 @@ async function createCustomerAccount() {
     email,
     password,
     options: {
-      captchaToken,
+  
       emailRedirectTo: 'https://a-aw-nig.github.io/aw-nigerian-food-gifting/'
     }
   });
