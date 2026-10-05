@@ -334,19 +334,11 @@ async function continueAsGuest() {
     return;
   }
 
-  const captchaToken = window.turnstile ? window.turnstile.getResponse() : '';
-
-  if (!captchaToken) {
-    alert('Please complete the security check first.');
-    return;
-  }
 
   const status = document.getElementById('guestStatus');
   status.textContent = 'Connecting…';
 
-  const { error } = await client.auth.signInAnonymously({
-    options: { captchaToken }
-  });
+ const { error } = await client.auth.signInAnonymously();
 
   if (error) {
     console.error('Guest sign-in error:', error);
