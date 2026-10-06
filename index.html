@@ -365,6 +365,7 @@ function showSignIn() {
       <input id="signInEmail" class="field" type="email" placeholder="Email address">
       <input id="signInPassword" class="field" type="password" placeholder="Password">
       <button class="cta" type="button" onclick="signInCustomer()">Sign In</button>
+      <button type="button" onclick="forgotPassword()" style="background:none;border:none;color:#176f52;text-decoration:underline;cursor:pointer;margin:10px 0;">Forgot Password?</button>
       <div id="accountStatus" class="muted"></div>
     </div>
   `);
@@ -424,6 +425,31 @@ function showCreateAccount() {
  alert('Welcome back to AW ✓');
 show('locations');
 }
+async function forgotPassword() {
+  const client = getSupabase();
+  const email = document.getElementById('signInEmail').value.trim();
+  const status = document.getElementById('accountStatus');
+
+  if (!email) {
+    status.textContent = 'Please enter your email address first.';
+    return;
+  }
+
+  status.textContent = 'Sending password reset email...';
+
+  const { error } = await client.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://a-aw-nig.github.io/aw-nigerian-food-gifting/'
+  });
+
+  if (error) {
+    console.error('Password reset error:', error);
+    status.textContent = error.message;
+    return;
+  }
+
+  status.textContent = 'Password reset email sent. Please check your inbox or spam folder.';
+}  
+
 async function createCustomerAccount() {
   const client = getSupabase();
 
