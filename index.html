@@ -450,7 +450,52 @@ async function forgotPassword() {
   status.textContent = 'Password reset email sent. Please check your inbox or spam folder.';
 }  
 
-async function createCustomerAccount() {
+
+  async function updateCustomerPassword() {
+    const client = getSupabase();
+    const status = document.getElementById('accountStatus');
+    const newPassword = document.getElementById('newPassword').value;
+
+    if (!newPassword || newPassword.length < 6) {
+        status.textContent = 'Please create a password with at least 6 characters.';
+        return;
+    }
+
+    status.textContent = 'Updating your password...';
+
+    const { error } = await client.auth.updateUser({
+        password: newPassword
+    });
+
+    if (error) {
+        console.error('Password update error:', error);
+        status.textContent = error.message;
+        return;
+    }
+
+    status.textContent = 'Password updated successfully! You can now sign in.';
+    alert('Your AW password has been changed successfully ✓');
+    showSignIn();
+}
+function showPasswordResetForm() {
+    const accountActions = document.getElementById('accountActions');
+
+    const existingForm = document.getElementById('accountForm');
+    if (existingForm) {
+        existingForm.remove();
+    }
+
+    accountActions.insertAdjacentHTML('afterend', `
+        <div id="accountForm">
+            <h3>Create New Password</h3>
+            <input id="newPassword" class="field" type="password" placeholder="Enter new password">
+            <button class="cta" type="button" onclick="updateCustomerPassword()">Save New Password</button>
+            <div id="accountStatus" class="muted"></div>
+        </div>
+    `);
+}
+ 
+  async function createCustomerAccount() {
   const client = getSupabase();
 
   if (!client) {
@@ -964,6 +1009,18 @@ async function verifyPaystackReturn() {
 verifyPaystackReturn();
  
   loadLocations();
+
+ const awAuthClient = getSupabase();
+
+if (awAuthClient) {
+    awAuthClient.auth.onAuthStateChange((event, session) => {
+        console.log('AW auth event:', event);
+
+        if (event === 'PASSWORD_RECOVERY') {
+            showPasswordResetForm();
+        }
+    });
+} 
 </script>
 </body>
 </html>
