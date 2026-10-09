@@ -14,6 +14,100 @@
 .section{padding:0 16px;margin:20px 0}.section h2{font-size:21px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:white;border-radius:20px;padding:18px;box-shadow:0 4px 20px #00000008}.big{grid-column:1/-1}.emoji{font-size:28px}.card h3{margin:8px 0 4px}.muted{color:var(--m);font-size:14px;line-height:1.4}.vendor{display:flex;align-items:center;gap:12px}.avatar{width:48px;height:48px;border-radius:15px;background:#e6f2eb;display:grid;place-items:center;font-size:23px}.arrow{margin-left:auto}.cta{width:100%;padding:14px;border-radius:14px;background:var(--g);color:white;font-weight:800;margin-top:14px}.secondary{background:white;color:var(--g);border:1px solid #d9ddd9}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);background:white;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 6px;z-index:10}.nav button{background:transparent;color:#747873;font-size:12px;padding:6px}.nav span{display:block;font-size:21px}.nav .active{color:var(--g);font-weight:800}
 .panel{padding:18px}.back{background:transparent;color:var(--g);font-weight:800;margin-bottom:15px}.field{width:100%;padding:14px;border:1px solid #d9ddd9;border-radius:13px;background:white;margin:7px 0;font:inherit}.notice{background:#fff4dc;border-radius:16px;padding:14px;margin:12px 0}.hidden{display:none}.location-card{cursor:pointer;margin-bottom:12px}.product-card{background:white;border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:0 4px 20px #00000008}.product-card h3{margin:6px 0}.vendor-name{font-weight:800;margin:0}.vendor-location{color:var(--m);font-size:14px}.price{font-size:18px;font-weight:900}.status{padding:12px;border-radius:14px;background:#eef7f2;margin:12px 0}.cart-panel{background:white;border-radius:20px;padding:18px;margin-top:16px}.cart-row{padding:12px 0;border-bottom:1px solid #eee}.qty{padding:5px 10px;border-radius:8px;margin:0 4px}.remove{background:transparent;color:#9a3434}.empty{text-align:center;padding:24px;color:var(--m)}
+
+/* AW PREMIUM WELCOME SCREEN */
+.aw-welcome {
+  background: linear-gradient(145deg, #210d26, #631b46);
+  color: #fff;
+  min-height: 85vh;
+  border-radius: 26px;
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.aw-welcome-logo {
+  font-size: 68px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.aw-welcome-logo span {
+  color: #e9b85d;
+  font-size: 30px;
+}
+
+.aw-welcome-label {
+  color: #f5d89c;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.aw-welcome h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 6vw, 42px);
+  line-height: 1.25;
+  color: #ffe5b2;
+}
+
+.aw-welcome-subtitle {
+  color: #fff0df;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.aw-welcome-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  margin: 12px auto;
+}
+
+.aw-feature-photo {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #75435c;
+  border: 2px solid #e9b85d;
+  aspect-ratio: 4 / 5;
+}
+
+.aw-feature-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aw-welcome-route {
+  color: #f5d89c;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.aw-get-started {
+  width: 100%;
+  max-width: 380px;
+  padding: 17px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ffe3a1, #dca64e);
+  color: #301326;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.aw-get-started:hover {
+  filter: brightness(1.08);
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -24,9 +118,48 @@
 <header class="top"><div class="logo">AW</div><button class="icon" onclick="show('locations')">📍</button></header>
 
 <main id="home">
-<section class="hero"><h1>Welcome to AW Nigerian Marketplace</h1><p>One App. 36 States. Connecting Hearts. ❤️</p><span class="pill">Food • Gifts • Fresh Produce • Snacks • Treats • Beauty & More</span></section>
+
+<section class="hero aw-welcome">
+  <div class="aw-welcome-logo">AW<span>♥</span></div>
+
+  <p class="aw-welcome-label">
+    NIGERIAN FOOD & GIFTING MARKETPLACE
+  </p>
+
+  <h1>
+    More than food.<br>
+    More than gifts.<br>
+    We connect hearts.
+  </h1>
+
+  <p class="aw-welcome-subtitle">
+    Wherever love needs to travel. ❤️
+  </p>
+
+  <div class="aw-welcome-showcase">
+    <div class="aw-feature-photo">
+      <img src="images/aw-food.jpg"
+           alt="Delicious Nigerian food">
+    </div>
+
+    <div class="aw-feature-photo">
+      <img src="images/aw-gifts.jpg"
+           alt="Beautiful gifts and flowers">
+    </div>
+  </div>
+
+  <p class="aw-welcome-route">
+    🇬🇧 London ⇄ 🌍 Africa
+  </p>
+
+  <button class="aw-get-started"
+          type="button"
+          onclick="document.getElementById('accountActions').scrollIntoView({behavior:'smooth',block:'center'})">
+    Get Started →
+  </button>
+</section>
 <section class="section">
-  <div class="card">
+ <div class="card" id="accountActions">
     <h3>Your AW Account</h3>
     <div class="muted">Sign in or create an account to manage your AW orders.</div>
 
