@@ -154,11 +154,11 @@
 
   <button class="aw-get-started"
           type="button"
-          onclick="document.getElementById('accountActions').scrollIntoView({behavior:'smooth',block:'center'})">
+         onclick="show('account')">
     Get Started →
   </button>
 </section>
-<section class="section">
+<section class="section" id="account" style="display:none;">
  <div class="card" id="accountActions">
     <h3>Your AW Account</h3>
     <div class="muted">Sign in or create an account to manage your AW orders.</div>
@@ -176,12 +176,13 @@
   </div>
 </section>
 
-
+<div id="awShoppingOptions" style="display:none;">
   <section class="section"><h2>What would you like to do?</h2><div class="grid"><div class="card" onclick="show('locations')"><div class="emoji">🍲</div><h3>Shop Food &amp; Drinks</h3><div class="muted">Restaurants, cafés, groceries, meals, snacks and drinks from vendors serving your location.</div></div>
 </div></section>
 
 
 <section class="section"><div class="card"><div class="emoji">🏪</div><h3>Sell on AW</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Apply to Sell on AW</button></div></section>
+</div>
 </main>
 
   <section id="customerOrders" class="panel hidden">
@@ -266,8 +267,7 @@ function getSupabase() {
 }
 
 function show(id, b) {
-document.querySelectorAll('main, section.panel').forEach(x => x.classList.add('hidden'));
-
+document.querySelectorAll('main, section.panel').forEach(x => { if (id !== 'account' || x.tagName !== 'MAIN') x.classList.add('hidden'); });
   const page = document.getElementById(id);
 
   if (!page) {
@@ -276,7 +276,17 @@ document.querySelectorAll('main, section.panel').forEach(x => x.classList.add('h
   }
 
   page.classList.remove('hidden');
-
+if (id === 'home') {
+  document.querySelector('.aw-welcome').style.display = 'flex';
+  document.getElementById('account').style.display = 'none';
+  document.getElementById('awShoppingOptions').style.display = 'none';
+}
+  if (id === 'account') {
+  document.querySelector('.aw-welcome').style.display = 'none';
+  page.style.display = 'block';
+  document.getElementById('awShoppingOptions').style.display = 'block';
+}
+  
   if (b) {
     document.querySelectorAll('.nav button').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
