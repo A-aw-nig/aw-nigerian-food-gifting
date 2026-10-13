@@ -240,7 +240,7 @@ async function loadCustomerOrders() {
 
   const { data: orders, error } = await client
     .from('orders')
-    .select('id, status, order_for, delivery_name, delivery_city, total_amount, created_at')
+    .select('id, status, order_for, delivery_name, delivery_city, total_amount, created_at, order_items(quantity, unit_price, products(name))')
     .eq('customer_id', user.id)
     .order('created_at', { ascending: false });
 
@@ -271,6 +271,9 @@ async function loadCustomerOrders() {
       <p>For: ${order.order_for === 'someoneElse' ? 'Someone else 🎁' : 'Myself'}</p>
       <p>Recipient: ${order.delivery_name || '-'}</p>
       <p>City: ${order.delivery_city || '-'}</p>
+     ${(order.order_items || []).map(item => `
+  <p>🛍️ ${item.products?.name || 'Product'} × ${item.quantity}</p>
+`).join('')}
       <p>Total: ₦${Number(order.total_amount || 0).toLocaleString('en-NG')}</p>
     </div>
   `).join('');
