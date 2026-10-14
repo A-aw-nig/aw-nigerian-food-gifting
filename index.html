@@ -34,6 +34,9 @@
       <button class="cta" type="button" onclick="showSignIn()">Sign In</button>
       <button class="cta" type="button" onclick="show('customerOrders')">📦 My Orders</button>
       <button class="cta" type="button" onclick="showCreateAccount()">Create Account</button>
+      
+<button class="cta" type="button" onclick="signOutCustomer()">🚪 Sign Out</button>
+
     </div>
 
     <div class="cf-turnstile" data-sitekey="0x4AAAAAAEFo-Iw8pIYNVCUD"></div>
@@ -428,7 +431,25 @@ function showCreateAccount() {
  alert('Welcome back to AW ✓');
 show('locations');
 }
-async function forgotPassword() {
+
+async function signOutCustomer() {
+  const client = getSupabase();
+  if (!client) return;
+
+  const { error } = await client.auth.signOut();
+
+  if (error) {
+    alert('Could not sign out: ' + error.message);
+    return;
+  }
+
+  document.getElementById('signInPassword').value = '';
+  alert('You have signed out of AW successfully.');
+  show('home');
+}
+
+  
+  async function forgotPassword() {
   const client = getSupabase();
   const email = document.getElementById('signInEmail').value.trim();
   const status = document.getElementById('accountStatus');
