@@ -157,7 +157,9 @@ document.querySelectorAll('main, section.panel').forEach(x => x.classList.add('h
   if (id === 'vendorOrders') {
     loadVendorOrders();
   }
-
+if (id === 'home') {
+  updateAccountButtons();
+}
   if (id === 'customerOrders') {
     loadCustomerOrders();
   }
