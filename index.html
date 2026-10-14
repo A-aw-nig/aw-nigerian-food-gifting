@@ -429,6 +429,7 @@ function showCreateAccount() {
   }
 
  alert('Welcome back to AW ✓');
+   await updateAccountButtons();
 show('locations');
 }
 
@@ -443,12 +444,25 @@ async function signOutCustomer() {
     return;
   }
 
-  document.getElementById('signInPassword').value = '';
+ document.getElementById('signInPassword').value = '';
+await updateAccountButtons();
+ 
   alert('You have signed out of AW successfully.');
   show('home');
 }
 
-  
+async function updateAccountButtons() {
+  const client = getSupabase();
+  if (!client) return;
+
+  const { data: { user } } = await client.auth.getUser();
+  const signedIn = !!user && !user.is_anonymous;
+
+  document.getElementById('accountSignInBtn').hidden = signedIn;
+  document.getElementById('accountCreateBtn').hidden = signedIn;
+  document.getElementById('accountMyOrdersBtn').hidden = !signedIn;
+  document.getElementById('accountSignOutBtn').hidden = !signedIn;
+}  
   async function forgotPassword() {
   const client = getSupabase();
   const email = document.getElementById('signInEmail').value.trim();
