@@ -432,7 +432,7 @@ function showCreateAccount() {
     status.textContent = error.message;
     return;
   }
-
+document.getElementById('accountForm')?.remove();
  alert('Welcome back to AW ✓');
    await updateAccountButtons();
 show('locations');
