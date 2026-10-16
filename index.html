@@ -58,10 +58,10 @@
 
   <section class="hero"><h1>Welcome to AW Nigerian Marketplace</h1><p>One App. 36 States. Connecting Hearts. ❤️</p><span class="pill">Food • Gifts • Fresh Produce • Snacks • Treats • Beauty & More</span></section>
 <button class="cta" type="button"
-onclick="document.querySelector('#accountActions').scrollIntoView({behavior:'smooth'})">
-  Get Started ❤️
+onclick="document.querySelector('#awAccountScreen').hidden = false; document.querySelector('#awAccountScreen').scrollIntoView({behavior:'smooth'})">
+❤️ Get Started 
 </button>
-  <section class="section">
+<section class="section" id="awAccountScreen" hidden>
   <div class="card">
     <h3>Your AW Account</h3>
     <div class="muted">Sign in or create an account to manage your AW orders.</div>
