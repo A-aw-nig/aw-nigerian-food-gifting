@@ -47,7 +47,7 @@
 <body>
 <div class="app">
 <header class="top">
-  <div class="logo" style="display:flex;align-items:center;gap:10px;">
+<div class="logo" id="awHeaderLogo" style="display:none;align-items:center;gap:10px;">
    <img src="images/aw-official-logo.png" class="aw-logo-animate"
          alt="AW Foods International"
          style="width:48px;height:48px;object-fit:contain;">
@@ -190,6 +190,7 @@ function getSupabase() {
 }
 
 function show(id, b) {
+  document.getElementById('awHeaderLogo').style.display = id === 'home' ? 'none' : 'flex';
 document.querySelectorAll('main, section.panel').forEach(x => x.classList.add('hidden'));
 
   const page = document.getElementById(id);
