@@ -83,12 +83,12 @@ onclick="document.querySelector('#awAccountScreen').hidden = false; document.que
 </section>
 <button class="cta" type="button" onclick="document.querySelector('#awShoppingChoices').hidden = false; document.querySelector('#awVendorChoices').hidden = false; document.querySelector('#awShoppingChoices').scrollIntoView({behavior:'smooth'})">🛍️ Explore AW Marketplace</button>
 
- <section class="section" id="awShoppingChoices" hidden><h2>What would you like to do?</h2>
+<section class="section" id="awShoppingChoices" hidden><h2>What would you like to do?</h2><div class="grid"><div class="card" onclick="show('locations')"><div class="emoji">🍲</div><h3>Shop Food &amp; Drinks</h3><div class="muted">Restaurants, cafés, groceries, meals, snacks and drinks from vendors serving your location.</div></div>
 </div></section>
 
 
-<section class="section" id="awVendorChoices" hidden><div class="card"><div class="emoji">🏪</div><h3>Sell on AW</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Apply to Sell on AW</button></div></section></main>
-
+<section class="section" id="awVendorChoices" hidden><div class="card"><div class="emoji">🏪</div><h3>Sell on AW</h3><div class="muted">Join free. No upfront membership fee. AW earns a commission after a completed sale.</div><button class="cta" onclick="show('vendor')">Apply to Sell on AW</button></div></section>
+</main>
   <section id="customerOrders" class="panel hidden">
   <button class="back" onclick="show('home')">‹ Back</button>
   <h1>📦 My Orders</h1>
