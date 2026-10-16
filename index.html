@@ -67,7 +67,7 @@
 <section class="hero" style="margin-top:-10px; border-radius:0 0 26px 26px; text-align:center; background:#FFF9F0; color:#421735;"><h1>Welcome to AW Marketplace</h1><p>One App. 36 States. Connecting Hearts. ❤️</p><span class="pill">Food • Gifts • Fresh Produce • Snacks • Treats • Beauty &amp; More</span></section>
   <p style="text-align:center; color:#61264F; font-weight:bold; font-size:17px; margin:12px 0;">🌍 Send Love Home — London ↔ Africa ❤️<br>More than food, more than gifts. We connect hearts.</p>
  <button class="cta" type="button" style="background:#D6AF37; color:#421735; border:1px solid #D6AF37;"
-onclick="document.querySelector('#awAccountScreen').hidden = false; document.querySelector('#awAccountScreen').scrollIntoView({behavior:'smooth'})">
+onclick="document.querySelector('#awAccountScreen').hidden = false; document.querySelector('#awExploreBtn').hidden = false; document.querySelector('#awAccountScreen').scrollIntoView({behavior:'smooth'})">
 ❤️ Get Started 
 </button>
 <section class="section" id="awAccountScreen" hidden>
@@ -90,8 +90,8 @@ onclick="document.querySelector('#awAccountScreen').hidden = false; document.que
     <div id="guestStatus" class="muted"></div>
   </div>
 </section>
-<button class="cta" type="button" onclick="document.querySelector('#awShoppingChoices').hidden = false; document.querySelector('#awVendorChoices').hidden = false; document.querySelector('#awShoppingChoices').scrollIntoView({behavior:'smooth'})">🛍️ Explore AW Marketplace</button>
-<section class="section" id="awPictureGallery">
+<button class="cta" type="button" id="awExploreBtn" hidden onclick="document.querySelector('#awPictureGallery').hidden = false; document.querySelector('#awVendorChoices').hidden = false; document.querySelector('#awShoppingChoices').hidden = false; document.querySelector('#awShoppingChoices').scrollIntoView({behavior:'smooth'})">🛍️ Explore AW Marketplace</button><section class="section" id="awPictureGallery" hidden>
+ <section class="section" id="awPictureGallery" hidden>
   <h2>Discover AW ❤️</h2>
   <p class="muted">Food, gifts and beautiful surprises for every occasion.</p>
  <div class="grid" id="awPictureCards">
