@@ -71,6 +71,10 @@
     animation: none;
   }
 }
+#home button[onclick*="selectedCategory"] {
+  padding: 10px 6px !important;
+  font-size: 16px !important;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -111,29 +115,29 @@
   </p>
  
 
-<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0;">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px auto;width:92%;">
 <button type="button" onclick="selectedCategory='food'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">
-🍲 Food
+🍲 Food <span style="color:#D6AF37;">❯</span>
 </button>
 <button type="button" onclick="selectedCategory='gifts'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
-🎁 Gifts
+🎁 Gifts <span style="color:#D6AF37;">❯</span>
 </button>
 
 <button type="button" onclick="selectedCategory='fresh produce'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
-🥬 Fresh Produce
+🥬 Fresh Produce <span style="color:#D6AF37;">❯</span>
 </button>
 
 <button type="button" onclick="selectedCategory='snacks & treats'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
-🧁 Snacks &amp; Treats
+🧁 Snacks &amp; Treats <span style="color:#D6AF37;">❯</span>
 
 </button>
 
 <button type="button" onclick="selectedCategory='cakes'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
-🎂 Cakes
+🎂 Cakes <span style="color:#D6AF37;">❯</span>
 </button>
 
 <button type="button" onclick="selectedCategory='beauty & more'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
-💄 Beauty &amp; More
+💄 Beauty &amp; More <span style="color:#D6AF37;">❯</span>
 </button>
 
 </div>
