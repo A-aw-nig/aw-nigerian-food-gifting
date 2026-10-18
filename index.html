@@ -309,7 +309,7 @@ function getSupabase() {
 function show(id, b) {
   document.getElementById('awHeaderLogo').style.display = id === 'home' ? 'none' : 'flex';
 document.querySelectorAll('main, section.panel').forEach(x => x.classList.add('hidden'));
-
+document.getElementById('home').hidden = id !== 'home';
   const page = document.getElementById(id);
 
   if (!page) {
