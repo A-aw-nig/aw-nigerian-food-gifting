@@ -408,7 +408,7 @@ async function loadCustomerOrders() {
 
   const { data: { user }, error: userError } = await client.auth.getUser();
 
-  if (userError || !user || user.is_anonymous) {
+  if (userError || !user) {
     list.innerHTML = '<p class="muted">Please sign in to your AW account to view your orders.</p>';
     return;
   }
