@@ -87,7 +87,6 @@
          style="width:48px;height:48px;object-fit:contain;">
    
   </div>
-  <button class="icon" onclick="show('locations')">📍</button>
 </header>
 <main id="home">
 
@@ -113,30 +112,27 @@
  
 
 <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0;">
-
-<button type="button" onclick="document.getElementById('awExploreBtn').click()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;">
+<button type="button" onclick="selectedCategory='food'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">🍲 Food
 🍲 Food
 </button>
-
-<button type="button" onclick="document.getElementById('awExploreBtn').click()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;">
+<button type="button" onclick="selectedCategory='gifts'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">🎁 Gifts
 🎁 Gifts
 </button>
 
-<button type="button" onclick="document.getElementById('awExploreBtn').click()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;">
+<button type="button" onclick="selectedCategory='fresh produce'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
 🥬 Fresh Produce
 </button>
 
-<button type="button" onclick="document.getElementById('awExploreBtn').click()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;">
-
+<button type="button" onclick="selectedCategory='snacks & treats'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
 🧁 Snacks &amp; Treats
 
 </button>
 
-<button type="button" onclick="document.getElementById('awExploreBtn').click()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;">
+<button type="button" onclick="selectedCategory='cakes'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">
 🎂 Cakes
 </button>
 
-<button type="button" onclick="document.getElementById('awExploreBtn').click()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;">
+<button type="button" onclick="selectedCategory='beauty & more'; show('locations')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:17px;font-weight:bold;cursor:pointer;width:100%;">💄 Beauty &amp; More
 💄 Beauty &amp; More
 </button>
 
@@ -313,7 +309,8 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Qm1Rph37O2LpTZ0fwE-Wew_rghMmYmz
 let awSupabase = null;
 let selectedStateId = null;
 let selectedLocationName = '';
-let cart = [];
+let selectedCategory = '';
+  let cart = [];
 
 function supabaseConfigured() {
   return !SUPABASE_URL.includes('PASTE_YOUR_') && !SUPABASE_PUBLISHABLE_KEY.includes('PASTE_YOUR_');
@@ -902,7 +899,9 @@ async function loadLocations() {
     return;
   }
 
-  const locationProducts = products || [];
+ const locationProducts = (products || []).filter(product => {
+  return !selectedCategory || String(product.category || '').trim().toLowerCase() === selectedCategory.toLowerCase();
+});
   if (!locationProducts.length) {
     productsBox.innerHTML = '<div class="empty">No available products are listed here yet.</div>';
     return;
