@@ -207,22 +207,50 @@ src="images/Beauty%20%26%20More_%20Luxury%20Marketplace%20Collection%20%281%29.p
 </main>
 <section class="panel hidden" id="awAccountScreen">
   <div class="card">
-    <h3>Your AW Account</h3>
-    <div class="muted">Sign in or create an account to manage your AW orders.</div>
-
-    <div id="accountActions">
-     <button id="accountSignInBtn" class="cta" type="button" onclick="showSignIn()">Sign In</button>
-      <button id="accountMyOrdersBtn" class="cta" type="button" onclick="show('customerOrders')">📦 My Orders</button>
-    <button id="accountCreateBtn" class="cta" type="button" onclick="showCreateAccount()">Create Account</button>
-      
+   <div style="text-align:center;">
+  <img src="images/aw-official-logo.png"
+       alt="AW Foods International Logo"
+       style="width:85px;height:85px;object-fit:contain;">
+  <p style="color:#61264F;font-size:16px;font-weight:bold;margin:6px 0;">
+    More Than Food. More Than Gifts.<br>
+    We Connect Hearts. ❤️
+  </p>
+  <p style="color:#B58C16;font-size:14px;font-weight:bold;margin:4px 0 12px;">
+    One App. Connecting Hearts. ❤️
+  </p>
+</div>
+   <div id="accountActions" style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+    <button id="accountSignInBtn" class="cta" type="button" onclick="showSignIn()" style="background:#61264F;color:white;border:1px solid #D6AF37;border-radius:14px;padding:12px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">👤 Sign In ❯</button>
+     <button id="accountMyOrdersBtn" class="cta" type="button" onclick="show('customerOrders')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:14px;padding:12px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">📦 My Orders ❯</button>
+   <button id="accountCreateBtn" class="cta" type="button" onclick="showCreateAccount()" style="background:#61264F;color:white;border:1px solid #D6AF37;border-radius:14px;padding:12px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">✨ Create Account ❯</button>      
 <button id="accountSignOutBtn" class="cta" type="button" onclick="signOutCustomer()">🚪 Sign Out</button>
 
     </div>
 
     <div class="cf-turnstile" data-sitekey="0x4AAAAAAEFo-Iw8pIYNVCUD"></div>
 
-    <button class="cta" type="button" onclick="continueAsGuest()">Continue as Guest</button>
+    <button class="cta" type="button" onclick="continueAsGuest()" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:14px;padding:12px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;margin-top:10px;">👥 Continue as Guest ❯</button>
+    <button type="button" onclick="show('locations')" style="background:#D6AF37;color:#421735;border:1px solid #B58C16;border-radius:14px;padding:12px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;margin-top:10px;">🌍 Explore AW ❯</button>
     <div id="guestStatus" class="muted"></div>
+ <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px;">
+
+  <div style="background:#FFF9F0;border:1px solid #D6AF37;border-radius:12px;padding:10px;text-align:center;color:#421735;font-size:13px;font-weight:bold;">
+    🛡️ Safe &amp; Secure
+  </div>
+
+  <div style="background:#FFF9F0;border:1px solid #D6AF37;border-radius:12px;padding:10px;text-align:center;color:#421735;font-size:13px;font-weight:bold;">
+    ✅ Shop from Verified Vendors
+  </div>
+
+  <div style="background:#FFF9F0;border:1px solid #D6AF37;border-radius:12px;padding:10px;text-align:center;color:#421735;font-size:13px;font-weight:bold;">
+    🏪 Support Local Businesses
+  </div>
+
+  <div style="background:#FFF9F0;border:1px solid #D6AF37;border-radius:12px;padding:10px;text-align:center;color:#421735;font-size:13px;font-weight:bold;">
+    ❤️ Send Love Home
+  </div>
+
+</div>
   </div>
 </section>
 
