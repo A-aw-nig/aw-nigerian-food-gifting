@@ -651,8 +651,10 @@ function showCreateAccount() {
 
   accountActions.insertAdjacentHTML('afterend', `
     <div id="accountForm">
+     <input id="createFullName" class="field" type="text" placeholder="Full Name" autocomplete="name">
       <input id="createEmail" class="field" type="email" placeholder="Email address">
       <input id="createPassword" class="field" type="password" placeholder="Create a password">
+      <input id="confirmPassword" class="field" type="password" placeholder="Confirm Password">
       <button class="cta" type="button" onclick="createCustomerAccount()">Create Account</button>
      <button id="resendConfirmationButton" class="cta" type="button" style="display:none;" onclick="resendCustomerConfirmation(document.getElementById('createEmail').value.trim())">Resend Confirmation Email</button>      <div id="accountStatus" class="muted"></div>
     </div>
@@ -806,13 +808,23 @@ function showPasswordResetForm() {
 
   const email = document.getElementById('createEmail').value.trim();
   const password = document.getElementById('createPassword').value;
+    const fullName = document.getElementById('createFullName').value.trim();
+const confirmPassword = document.getElementById('confirmPassword').value;
   const status = document.getElementById('accountStatus');
 
   if (!email || !password) {
     status.textContent = 'Please enter your email and create a password.';
     return;
   }
+if (!fullName || !confirmPassword) {
+  status.textContent = 'Please enter your full name and confirm your password.';
+  return;
+}
 
+if (password !== confirmPassword) {
+  status.textContent = 'Passwords do not match. Please try again.';
+  return;
+}
  
 
   status.textContent = 'Creating your AW account…';
@@ -821,7 +833,7 @@ function showPasswordResetForm() {
     email,
     password,
     options: {
-  
+  data: { full_name: fullName },
       emailRedirectTo: 'https://a-aw-nig.github.io/aw-nigerian-food-gifting/'
     }
   });
