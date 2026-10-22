@@ -89,7 +89,20 @@ box-shadow: none;
     border-radius: 16px;
   }
 }
-</style>
+
+@media (max-width: 600px) {
+  #home .aw-category-photos {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 14px !important;
+    row-gap: 22px !important;
+    padding: 0 12px !important;
+  }
+
+  #home .aw-category-photos img {
+    height: 190px !important;
+    object-fit: cover !important;
+  }
+}</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
@@ -161,7 +174,7 @@ box-shadow: none;
 </div>
 
 <h2 style="text-align:center;color:#421735;margin:24px 0 12px;">Explore AW Categories</h2>
-<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:80px;row-gap:70px;margin:24px auto;max-width:1400px;padding:0 24px;box-sizing:border-box;">  <div style="min-width:0;">
+<div class="aw-category-photos" style="display:grid;;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:80px;row-gap:70px;margin:24px auto;max-width:1400px;padding:0 24px;box-sizing:border-box;">  <div style="min-width:0;">
  <img onclick="selectedCategory='food'; show('awAccountScreen')"
    src="images/Sunlit Tropical Feast in an Ornate Mirror.png"
     alt="Authentic Nigerian Food and Drinks"
