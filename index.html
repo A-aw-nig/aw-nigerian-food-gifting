@@ -661,7 +661,8 @@ function showCreateAccount() {
   <input id="confirmPassword" class="field" type="password" placeholder="Confirm Password" style="padding-right:80px;">
   <button type="button" onclick="const p=document.getElementById('confirmPassword');p.type=p.type==='password'?'text':'password';this.textContent=p.type==='password'?'Show':'Hide';" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#421735;font-weight:bold;cursor:pointer;">Show</button>
 </div>
-      <button class="cta" type="button" onclick="createCustomerAccount()">Create Account</button>
+    <button class="cta" type="button" onclick="createCustomerAccount()">Create Account</button> 
+     <button type="button" onclick="showSignIn()" style="background:transparent;border:1px solid #D4AF37;color:#421735;padding:14px;border-radius:12px;width:100%;font-weight:bold;cursor:pointer;margin-top:10px;">← Back to Sign In</button>
      <button id="resendConfirmationButton" class="cta" type="button" style="display:none;" onclick="resendCustomerConfirmation(document.getElementById('createEmail').value.trim())">Resend Confirmation Email</button>      <div id="accountStatus" class="muted"></div>
     </div>
   `);
