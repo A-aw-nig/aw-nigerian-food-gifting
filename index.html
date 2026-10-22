@@ -632,7 +632,10 @@ function showSignIn() {
   accountActions.insertAdjacentHTML('afterend', `
     <div id="accountForm">
       <input id="signInEmail" class="field" type="email" placeholder="Email address">
-      <input id="signInPassword" class="field" type="password" placeholder="Password">
+     <div style="position:relative;">
+  <input id="signInPassword" class="field" type="password" placeholder="Password" style="padding-right:80px;">
+  <button type="button" onclick="const p=document.getElementById('signInPassword');p.type=p.type==='password'?'text':'password';this.textContent=p.type==='password'?'Show':'Hide';" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#421735;font-weight:bold;cursor:pointer;">Show</button>
+</div>
       <button class="cta" type="button" onclick="signInCustomer()">Sign In</button>
       <button type="button" onclick="forgotPassword()" style="background:none;border:none;color:#176f52;text-decoration:underline;cursor:pointer;margin:10px 0;">Forgot Password?</button>
       <div id="accountStatus" class="muted"></div>
