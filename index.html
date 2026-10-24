@@ -145,6 +145,30 @@ box-shadow: none;
   color: #421735 !important;
 }
 
+
+/* AW Vendor Application - spacious responsive fields */
+#vendor input.field,
+#vendor select.field,
+#vendor textarea.field {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 54px !important;
+  padding: 14px 16px !important;
+  margin: 0 0 16px !important;
+  border: 1px solid #D9C9D2 !important;
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  color: #421735 !important;
+  font-size: 16px !important;
+}
+
+#vendor textarea.field {
+  min-height: 130px !important;
+  resize: vertical;
+}
+
 }</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
