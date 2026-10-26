@@ -873,7 +873,8 @@ async function signOutCustomer() {
     return;
   }
 
- document.getElementById('signInPassword').value = '';
+const passwordField = document.getElementById('signInPassword');
+if (passwordField) passwordField.value = '';
 await updateAccountButtons();
  
   alert('You have signed out of AW successfully.');
