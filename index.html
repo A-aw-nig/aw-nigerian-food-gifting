@@ -334,6 +334,13 @@ src="images/pexels-theglowvibes_mah-_-2149141667-30486363.jpg"
    <button id="accountCreateBtn" class="cta" type="button" onclick="showCreateAccount()" style="background:#61264F;color:white;border:1px solid #D6AF37;border-radius:14px;padding:12px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">✨ Create Account ❯</button>      
 <button id="accountSignOutBtn" class="cta" type="button" onclick="signOutCustomer()">🚪 Sign Out</button>
 
+<button id="accountAdminBtn" class="cta" type="button"
+  onclick="show('adminDashboard')"
+  hidden
+  style="background:#D6AF37;color:#421735;border:0;border-radius:14px;padding:14px;font-size:16px;font-weight:bold;width:100%;cursor:pointer;margin-top:10px;">
+  👑 AW Admin Dashboard
+</button>
+
     </div>
 
    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEFo-Iw8pIYNVCUD" style="margin:0;padding:0;"></div>
@@ -884,6 +891,24 @@ async function updateAccountButtons() {
   document.getElementById('accountCreateBtn').hidden = signedIn;
  document.getElementById('accountMyOrdersBtn').hidden = !user;
   document.getElementById('accountSignOutBtn').hidden = !signedIn;
+ 
+const adminBtn = document.getElementById('accountAdminBtn');
+if (adminBtn) {
+  adminBtn.hidden = true;
+
+  if (signedIn) {
+    const { data: profile, error } = await client
+      .from('profiles')
+      .select('account_type')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (!error && profile?.account_type === 'admin') {
+      adminBtn.hidden = false;
+    }
+  }
+}
+ 
 }  
   async function forgotPassword() {
   const client = getSupabase();
