@@ -642,7 +642,45 @@ async function loadAdminVendors() {
       line.textContent = `${label}: ${value || 'Not provided'}`;
       card.appendChild(line);
     });
+if (vendor.status === 'pending') {
+  const buttons = document.createElement('div');
+  buttons.style.cssText = 'display:flex;gap:10px;margin-top:12px;';
 
+  [
+    ['✅ Approve', 'approved', '#61264F'],
+    ['❌ Reject', 'rejected', '#D6AF37']
+  ].forEach(([label, decision, color]) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = label;
+    button.style.cssText =
+      `background:${color};color:${decision === 'approved' ? 'white' : '#421735'};padding:12px;border:0;border-radius:10px;flex:1;cursor:pointer;`;
+
+    button.onclick = async () => {
+      if (!confirm(`${label} ${vendor.business_name}?`)) return;
+
+      button.disabled = true;
+
+      const { error } = await client.rpc('review_aw_vendor', {
+        p_vendor_id: vendor.id,
+        p_decision: decision
+      });
+
+      if (error) {
+        alert('Unable to review vendor: ' + error.message);
+        button.disabled = false;
+        return;
+      }
+
+      alert('Vendor application ' + decision + ' successfully! 💜💛');
+      await loadAdminVendors();
+    };
+
+    buttons.appendChild(button);
+  });
+
+  card.appendChild(buttons);
+}
     list.appendChild(card);
   });
 }
