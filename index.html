@@ -807,7 +807,17 @@ if (vendorError || !vendor) {
   return;
 }
 
-list.textContent = 'Welcome! Your approved business is ready for product management.';
+
+list.innerHTML = `
+  <p>Welcome! Your approved business is ready for product management.</p>
+
+  <h3>🛍️ Add a New Product</h3>
+
+  <input id="awProductName" type="text" placeholder="Product name">
+  <input id="awProductPrice" type="number" min="1" placeholder="Price in Naira (₦)">
+  <textarea id="awProductDescription" placeholder="Product description"></textarea>
+`;
+
 
 }
   
