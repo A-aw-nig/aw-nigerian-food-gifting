@@ -793,6 +793,22 @@ if (userError || !user || user.is_anonymous) {
   return;
 }
 
+const { data: vendor, error: vendorError } = await client
+  .from('vendors')
+  .select('id, business_name')
+  .eq('user_id', user.id)
+  .eq('status', 'approved')
+  .eq('is_active', true)
+  .limit(1)
+  .maybeSingle();
+
+if (vendorError || !vendor) {
+  list.textContent = 'Only approved AW vendors can manage products.';
+  return;
+}
+
+list.textContent = 'Welcome! Your approved business is ready for product management.';
+
 }
   
   async function loadCustomerOrders() {
