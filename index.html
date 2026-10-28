@@ -776,8 +776,12 @@ ${order.status === 'out_for_delivery' ? `
 
 
 async function loadVendorProducts() {
+ 
+const client = getSupabase();
+
   const list = document.getElementById('vendorProductsList');
-  if (!list) return;
+ 
+if (!client || !list) return;
 
   list.innerHTML = '<p class="muted">Loading your products...</p>';
 }
