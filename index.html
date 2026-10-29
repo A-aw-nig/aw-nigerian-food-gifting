@@ -825,7 +825,23 @@ list.innerHTML = `
 }
 
 async function saveVendorProduct() {
-  alert('AW Product Saving is being connected. 💜💛');
+  const client = getSupabase();
+
+  if (!client) {
+    alert('AW database connection is unavailable.');
+    return;
+  }
+
+  const name = document.getElementById('awProductName').value.trim();
+  const price = Number(document.getElementById('awProductPrice').value);
+  const description = document.getElementById('awProductDescription').value.trim();
+
+  if (!name || !Number.isFinite(price) || price <= 0) {
+    alert('Please enter a product name and a valid price.');
+    return;
+  }
+
+  alert('Product details checked successfully! 💜💛');
 }
   
   async function loadCustomerOrders() {
