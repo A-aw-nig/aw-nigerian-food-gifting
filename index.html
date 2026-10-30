@@ -841,7 +841,46 @@ async function saveVendorProduct() {
     return;
   }
 
-  alert('Product details checked successfully! 💜💛');
+ 
+const { data: { user }, error: userError } = await client.auth.getUser();
+
+if (userError || !user || user.is_anonymous) {
+  alert('Please sign in with your vendor account.');
+  return;
+}
+
+const { data: vendor, error: vendorError } = await client
+  .from('vendors')
+  .select('id')
+  .eq('user_id', user.id)
+  .eq('status', 'approved')
+  .eq('is_active', true)
+  .limit(1)
+  .maybeSingle();
+
+if (vendorError || !vendor) {
+  alert('Only approved AW vendors can save products.');
+  return;
+}
+
+const { error: saveError } = await client
+  .from('products')
+  .insert({
+    vendor_id: vendor.id,
+    name: name,
+    description: description,
+    price: price,
+    category: 'cakes',
+    is_available: true
+  });
+
+if (saveError) {
+  console.error('AW product saving error:', saveError);
+  alert('Product could not be saved: ' + saveError.message);
+  return;
+}
+
+alert('Product saved successfully! 💜💛');
 }
   
   async function loadCustomerOrders() {
