@@ -388,7 +388,8 @@ header.top {
 <section class="hero" style="margin-top:0; border-radius:32px; text-align:left; background:linear-gradient(120deg,#FFF1D8,#FFFAF1); color:#421735; padding:35px 6%; border:2px solid #D6AF37;">
 
   
-
+<div class="aw-hero-layout" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:30px;align-items:center;">
+  <div class="aw-hero-text">
 
 <h1 style="font-family:Georgia,serif;font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.15;letter-spacing:-1px;color:#421735;margin:8px 0 12px;text-align:left;">
 
@@ -402,12 +403,14 @@ Welcome to<br>AW Marketplace
   onclick="show('awAccountScreen')">
   ❤️ Get Started ❯
 </button> 
-<img
+</div>
+    <img
   src="images/Festive Nigerian Food and Gift Celebration.png"
   alt="AW Marketplace food, gifts, cake and treats"
   style="display:block;width:100%;max-width:520px;height:auto;border-radius:22px;margin:20px 0;"
 >
-<div style="display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px auto;width:92%;">
+</div>
+  <div style="display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px auto;width:92%;">
 <button type="button" onclick="selectedCategory='food';show('awAccountScreen')" style="background:#FFF9F0;color:#421735;border:2px solid #D6AF37;border-radius:18px;padding:20px 8px;font-size:15px;font-weight:bold;width:100%;cursor:pointer;">
 🍲 Food <span style="color:#D6AF37;">❯</span>
 </button>
