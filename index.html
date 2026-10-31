@@ -180,6 +180,56 @@ box-shadow: none;
   background-repeat: no-repeat !important;
 }
 
+/* AW Luxury Homepage — Phase 1 */
+#home {
+  background: #FFF8EE !important;
+}
+
+/* Elegant welcome section */
+#home .hero {
+  background: linear-gradient(
+    135deg,
+    #FFF8EE 0%,
+    #FFF0D6 100%
+  ) !important;
+  color: #421735 !important;
+  border-radius: 24px !important;
+  padding: 24px 18px !important;
+  border: 1px solid #D4AF37;
+  text-align: center;
+}
+
+/* Luxury welcome heading */
+#home .hero h1 {
+  color: #421735 !important;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Preserve existing images */
+#home img {
+  object-fit: cover;
+}
+
+/* Keep official logo proportions */
+#home .aw-welcome-logo img {
+  object-fit: contain;
+}
+
+/* Mobile-friendly welcome */
+@media (max-width: 600px) {
+  #home .hero {
+    padding: 16px 12px !important;
+    border-radius: 18px !important;
+  }
+
+  #home .hero h1 {
+    font-size: 26px !important;
+  }
+}
+
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
