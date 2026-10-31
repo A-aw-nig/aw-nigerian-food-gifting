@@ -1418,7 +1418,7 @@ async function loadLocations() {
   productsBox.innerHTML = locationProducts.map(product => {
     const vendor = visibleVendors.find(v => Number(v.id) === Number(product.vendor_id));
     const safeName = String(product.name || 'Product').replace(/'/g, '&#39;');
-   return `<div class="product-card" style="background:#FFF9F0;border:2px solid #D6AF37;border-radius:20px;padding:20px;box-shadow:0 6px 18px rgba(66,23,53,0.10);">
+   return `<div class="product-card" style="background:#FFF9F0;border:2px solid #D6AF37;border-radius:20px;padding:20px;max-width:650px;margin:12px auto;box-shadow:0 6px 18px rgba(66,23,53,0.10);">
       <img src="${product.image_url || ''}" alt="${safeName}" style="display:${product.image_url ? 'block' : 'none'};width:100%;max-width:450px;height:300px;object-fit:cover;border-radius:14px;margin-bottom:14px;" onerror="this.style.display='none'">
       <p class="vendor-name">${vendor?.business_name || 'AW Vendor'}</p>
       <p class="vendor-location">📍 ${vendor?.city || selectedLocationName || 'Location'}</p>
