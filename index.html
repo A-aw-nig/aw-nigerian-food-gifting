@@ -333,6 +333,18 @@ header.top {
   }
 }
 
+@media (max-width: 700px) {
+  .aw-hero-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .aw-hero-layout img {
+    max-width: 100% !important;
+    margin: 10px 0 !important;
+  }
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -388,7 +400,7 @@ header.top {
 <section class="hero" style="margin-top:0; border-radius:32px; text-align:left; background:linear-gradient(120deg,#FFF1D8,#FFFAF1); color:#421735; padding:35px 6%; border:2px solid #D6AF37;">
 
   
-<div class="aw-hero-layout" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:30px;align-items:center;">
+<div class="aw-hero-layout" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;align-items:center;">
   <div class="aw-hero-text">
 
 <h1 style="font-family:Georgia,serif;font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.15;letter-spacing:-1px;color:#421735;margin:8px 0 12px;text-align:left;">
