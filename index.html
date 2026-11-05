@@ -334,10 +334,36 @@ z-index: 2;
 }
 
 @media (max-width: 700px) {
-  .aw-hero-layout {
-   grid-template-columns: minmax(0, 1fr) !important;
-    gap: 16px !important;
+  header.top {
+    padding: 8px !important;
+    gap: 6px !important;
   }
+
+  #awHeaderLogo {
+    gap: 5px !important;
+    min-width: 0;
+  }
+
+  #awHeaderLogo img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  #awHeaderLogo > div {
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+  }
+
+  header.top > div:nth-child(2) {
+    font-size: 13px !important;
+    white-space: nowrap;
+  }
+
+  header.top nav {
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
+  }
+}
 
   .aw-hero-layout img {
     max-width: 100% !important;
