@@ -338,14 +338,15 @@ z-index: 2;
   }
 }
 
-@media (max-width: 700px) {
-  header.top {
-    padding: 4px 8px !important;
-    gap: 6px !important;
-   flex-wrap: wrap !important;
-  }
-
+header.top {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  padding: 6px 10px !important;
+  gap: 6px 10px !important;
+}
   #awHeaderLogo {
+    grid-column: 1 / -1 !important;
     display: flex !important;
     gap: 5px !important;
     min-width: 0;
@@ -364,10 +365,14 @@ z-index: 2;
 
   header.top > div:nth-child(2) {
    font-size: 11px !important;
+    grid-column: 1 !important;
+grid-row: 2 !important;
    white-space: normal !important;
   }
 
   header.top nav {
+    grid-column: 2 !important;
+grid-row: 2 !important;
     gap: 4px !important;
     flex-wrap: nowrap !important;
   }
