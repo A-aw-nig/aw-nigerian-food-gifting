@@ -386,7 +386,30 @@ grid-row: 2 !important;
   margin: 8px auto !important;
   border-radius: 18px !important;
 }
-</style>
+.aw-category-photos {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+.aw-category-photos > div {
+  min-width: 0 !important;
+}
+
+.aw-category-photos img {
+  display: block !important;
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 700px) {
+  .aw-category-photos {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+  </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
