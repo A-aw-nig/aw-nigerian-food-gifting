@@ -1759,7 +1759,11 @@ function addToCart(id, name, price, vendorId) {
   const existing = cart.find(item => Number(item.id) === Number(id));
   if (existing) existing.quantity += 1;
   else cart.push({ id:Number(id), name, price:Number(price), vendorId:Number(vendorId), quantity:1 });
-  openCart();
+openCart();
+document.getElementById('cartPanel')?.scrollIntoView({
+  behavior: 'smooth',
+  block: 'start'
+});
 }
 
 function changeQuantity(id, amount) {
