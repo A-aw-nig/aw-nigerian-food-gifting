@@ -1726,9 +1726,7 @@ const visibleVendors = (vendors || []).filter(vendor => vendor.status === 'appro
     return;
   }
 
- const locationProducts = (products || []).filter(product => {
-  return !selectedCategory || String(product.category || '').trim().toLowerCase() === selectedCategory.toLowerCase();
-});
+const locationProducts = products || [];
   if (!locationProducts.length) {
     productsBox.innerHTML = '<div class="empty">No available products are listed here yet.</div>';
     return;
