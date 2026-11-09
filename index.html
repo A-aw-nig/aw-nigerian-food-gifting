@@ -411,6 +411,27 @@ grid-row: 2 !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+ /* AW Checkout - Responsive Delivery Fields */
+.aw-delivery-fields {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+.aw-delivery-fields .field {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  min-height: 54px !important;
+  padding: 14px 16px !important;
+  border: 1px solid #D9C9D2 !important;
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  font-size: 16px !important;
+}
   </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -1820,7 +1841,7 @@ function startCheckout() {
     Someone else 🎁
   </label>
 </div>
-
+<div class="aw-delivery-fields">
 
 <input
   class="field"
@@ -1858,7 +1879,7 @@ function startCheckout() {
       id="deliveryCity"
       placeholder="City"
     >
-
+</div>
     <button class="cta" type="button" onclick="continueCheckout()">
       Continue
     </button>
